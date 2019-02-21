@@ -1,0 +1,105 @@
+{
+  "P1:TITULO": "SELECT YOUR LANGUAGE",
+  "P1:BOTON": "SELECT",
+
+  "P2:SEGMENTO1": "LOG IN",
+  "P2:EMAIL": "EMAIL",
+  "P2:PASSWORD": "PASSWORD",
+  "P2:RECORDARC": " REMEMBER PASSWORD",
+  "P2:INICIAR": "LOG IN",
+  "P2:NOMREQ": "Name required",
+  "P2:EMAILREQ": "Required email",
+  "P2:PASSREQ": "Password required",
+   "P2:SEGMENTO2": "REGISTRY",
+   "P2:REGNOMBRE": "NAME",
+   "P2:REGEMAIL": "EMAIL",
+   "P2:REGPASSWORD": "PASSWORD",
+   "P2:REGBOTON": "REGISTRY",
+   "P2:ACEPTERM1": "By registering I accept the ",
+   "P2:ACEPTERM2": "terms ",
+   "P2:ACEPTERM3": "of use",
+   "P2:OLVIDOCON": "FORGOT YOUR PASSWORD",
+   "P2:OLVIDOCON2": "Enter your email, to start the password reset",
+
+   "P3:TITULO3": "Settings",
+   "P3:BOTON3": "CONTINUE",
+   "P3:UBICACION": "LOCATION: ",
+   "P3:MISMAPAS": "Select your location: ",
+   "P3:SEGMENTO1": "MAPS",
+   "P3:SEGMENTO2": "PROMOTIONS",
+   "P3:BARRABUSQUEDA": "Search",
+   "P3:TXTUBICACIONACTUAL": "Current location",
+   "P3:TXTCAMBIARUBICACION": "Change?",
+
+   "P4:TXTMOSTRARPOR": "Show by",
+   "P4:TXTBUSCAR": "Search",
+   "P5:LOCATION": "Location",
+   "P5:VERMAPA": " See location on the map",
+   "P5:UBICACION": "Location: ",
+   "P5:WEB": "Web: ",
+   "P5:TEL": "Phone: ",
+   "P5:EMAIL": "E-mail: ",
+
+   "P6:MAPAS": "Maps",
+   "P6:COMERCIO": "Promotions",
+   "P6:CONFIGURACIONES": "Settings",
+
+   "P7:ESCANEARPROMO": "Scan promotion",
+   "P7:DISTANCIAAPROXIMADA": "Approximate distance",
+
+   "P3:PESOTXT": "You are using ",
+   "P3:PESOTXT1": " of internal space.",
+
+   "P2:TXTSTEPS": "Are you ready?",
+   "P2:TXTSTEPS1": "LET'S START NOW!",
+   "P2:TXTSTEPS2": "Welcomes you",
+
+
+
+  "configuracion" : {
+    "actualizacion": "Verifying updates",
+    "ciudades": "Getting available cities...",
+    "contenido": "Updating content...",
+    "descargando": "Downloading images and audios...",
+    "titulo_atencion": "Attention!",
+    "no_ciudad": "This city is not found in our database",
+    "aceptar": "Ok",
+    "cancelar": "Cancel",
+    "continuar": "Continue",
+    "existe_mapa": "You already have this map",
+    "descargar_mapa": "You need to download the maps to navigate offline. Check that you are connected to a WiFi zone.",
+    "descargando_mapa": "Downloading map...",
+    "descomprimir": "Unzipping content...",
+    "ubicacion_disponible": "To continue select any of the available locations.",
+    "eliminar": "Removing content...",
+    "confirmar_eliminar": "Do you want to delete the current map?",
+    "eliminar_ok": "Map successfully removed!",
+    "eliminar_error": "The map was not deleted!",
+    "sin_mapa": "You have not yet downloaded the map of the selected city.",
+    "sin_mapa_descarga":"You have not yet downloaded the map of the selected city, do you want to download it?"
+  },
+   "P6:VER_INFO_LOCAL":" See local information",
+  
+   "offlinemaps":{
+    "ubicacion":"Getting your location",
+    "mapa_offline":"Loading maps..",
+    "tu_te_encuentras_aqui":"You are here"
+    },
+
+    "promotion_detail":{
+      "validando": "Validating",
+      "obteniendo_calificacion": "Getting qualification",
+      "escanea":"Scan the QR code",
+      "lo_sentimos": "We are sorry",
+      "qr":"The scanned Qr code is invalid.",
+      "acceso_camara":"Allow the use of the camera to access this functionality.",
+      "qr2":"Scanned Qr code is incorrect or does not belong to this facility.",
+      "exito":"Success",
+      "promocion_correcta":"Promotion scanned correctly.",
+      "ya_esta_escaneado":"You have already scanned this promotion.",
+      "error_inesperado":"Unexpected error",
+      "aceptar":"Accept",
+      "sincronizando":"Synchronizing scanned promotions.."
+    }
+
+}

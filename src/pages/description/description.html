@@ -1,0 +1,35 @@
+<div ion-fixed class="salir" (click)="salir()">x</div>
+
+<ion-content padding>
+
+    <div class="imagen" *ngIf="galerias && galerias.length == 0"><img img [src]="storageDirectory+imagen" alt="" width="320px" height="auto"></div>
+   
+    
+    <ion-slides [paginationType]="bullets" [pager]="true" *ngIf="galerias && galerias.length > 0">
+        <ion-slide *ngFor="let galeria of galerias">
+            <img img [src]="storageDirectory+format_ur(galeria.imagen)" alt="">
+        </ion-slide>
+    </ion-slides>
+
+    
+    
+    <div class="nombre">{{nombre}}</div>
+
+    <ion-card-content class="descripcion" [innerHTML]="descripcion"> 
+    </ion-card-content>
+    
+    <ion-label class="ver_mapa" *ngIf="direccion"><ion-icon name="pin" class="ubicacion"> </ion-icon> <b>{{ 'P5:UBICACION' | translate }}</b> {{direccion}}</ion-label>
+    <ion-label class="ver_mapa" *ngIf="web"><ion-icon name="desktop" class="ubicacion"> </ion-icon> <b>{{ 'P5:WEB' | translate }}</b> {{web}}</ion-label>
+    <ion-label class="ver_mapa" *ngIf="email"><ion-icon name="at" class="ubicacion"> </ion-icon> <b>{{ 'P5:EMAIL' | translate }}</b> {{email}}</ion-label>
+    <ion-label class="ver_mapa" *ngIf="telefono"><ion-icon name="call" class="ubicacion"> </ion-icon> <b>{{ 'P5:TEL' | translate }}</b> {{telefono}}</ion-label>
+    <br>
+    <div class="reproductor">
+        <audio controls class="audio" *ngIf="audio">
+            <source [src]="storageDirectory+audio" type="audio/mpeg">
+                <!--<source src="{{file.dataDirectory}}/archivos/audios/1.mp3" type="audio/mpeg">-->
+        </audio> 
+    </div>
+    
+    <ion-label class="ver_mapa_ub" (click)="ver_mapa()" *ngIf="latitud"><ion-icon name="locate" class="ubicacion"> </ion-icon> {{ 'P5:VERMAPA' | translate }}</ion-label>
+</ion-content>
+ 

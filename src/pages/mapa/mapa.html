@@ -1,0 +1,16 @@
+
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>{{ 'P5:LOCATION' | translate }}</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+<ion-content>
+  <div id="map1"></div>
+  <div class="info" *ngIf="distancia.metros" >
+    {{ 'P7:DISTANCIAAPROXIMADA' | translate }}<br><br>
+    {{ distancia.metros }} m <br>
+    {{ distancia.kilometros }} km
+  </div>
+</ion-content>

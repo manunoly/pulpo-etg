@@ -1,0 +1,45 @@
+<ion-menu [content]="content">
+  <ion-header class="menu_header">
+
+  <ion-navbar color="primary" class="user-profile navtop">
+    <ion-title text-left>
+
+      <ion-grid>
+
+        <ion-row>
+          <ion-col col-3> 
+            <ion-icon color="primary"  name='icon-user'></ion-icon>
+          </ion-col>
+
+        </ion-row>
+
+      </ion-grid>
+      
+
+    </ion-title>
+  </ion-navbar>
+
+  </ion-header>
+
+
+  <ion-content padding>
+    <img src="assets/img/logotipo.png" alt=""> 
+    <ion-list>
+
+      <button ion-item menuClose *ngFor="let p of pages" (click)="openPage(p)" >
+        <ion-icon item-start [name]="p.icon" >
+        </ion-icon> 
+        <label color="menu-icons" class="text-icons">{{ p.title }}</label> 
+      </button>
+
+      <button style="color:rgba(60, 60, 60, 0.7)!important;" ion-item menuClose (click)="logout()" >
+        <ion-icon item-start name="exit" color="menu-icons">
+        </ion-icon> 
+        <label color="menu-icons" class="text-icons">Salir</label> 
+      </button>
+      
+    </ion-list>
+
+  </ion-content>
+</ion-menu>
+<ion-nav [root]="rootPage" #content swipeBackEnable="false"> </ion-nav>

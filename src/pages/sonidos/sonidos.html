@@ -1,0 +1,26 @@
+<ion-header>
+    
+  <ion-navbar color="primary" class="navtop">
+
+    <ion-buttons left>
+      <button ion-button menuToggle >
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    
+    <ion-title >Pruebas audio offline</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <h3>Audio 1</h3>
+    <audio controls>
+        <source src="{{file.dataDirectory}}/archivos/audios/1.mp3" type="audio/mpeg">
+    </audio>
+    <h3>{{nombre}}</h3>
+    <audio controls>
+        <source src="{{file.dataDirectory}}/archivos/audios/2.mp3" type="audio/mpeg">
+    </audio>
+    
+</ion-content>

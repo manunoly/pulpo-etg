@@ -1,0 +1,105 @@
+{
+
+  "P1:TITULO": "SELECCIONE SU IDIOMA",
+  "P1:BOTON": "SELECCIONAR",
+
+   "P2:SEGMENTO1": "INICIAR SESIÓN",
+   "P2:EMAIL": "EMAIL",
+   "P2:PASSWORD": "CONTRASEÑA",
+   "P2:RECORDARC": " RECORDAR CONTRASEÑA",
+   "P2:INICIAR": "INICIAR SESIÓN",
+   "P2:EMAILREQ": "Email requerido",
+   "P2:PASSREQ": "Contraseña requerida",
+   "P2:NOMREQ": "Nombre requerido",
+   "P2:SEGMENTO2": "REGISTRO",
+   "P2:REGNOMBRE": "NOMBRE",
+   "P2:REGEMAIL": "EMAIL",
+   "P2:REGPASSWORD": "CONTRASEÑA",
+   "P2:REGBOTON": "REGISTRARSE",
+   "P2:ACEPTERM1": "Al registrarme acepto los ",
+   "P2:ACEPTERM2": "términos ",
+   "P2:ACEPTERM3": "de uso",
+   "P2:OLVIDOCON": "¿OLVIDÓ SU CONTRASEÑA?",
+   "P2:OLVIDOCON2": "Ingrese su email, para iniciar el reseteo de contraseña",
+
+    "P3:TITULO3": "Configuración",
+    "P3:BOTON3": "CONTINUAR",
+    "P3:UBICACION": "UBICACIÓN: ",
+    "P3:MISMAPAS": "Selecciona tu ubicación: ",
+    "P3:SEGMENTO1": "MAPAS",
+    "P3:SEGMENTO2": "PROMOCIONES",
+    "P3:BARRABUSQUEDA": "Buscar",
+    "P3:TXTUBICACIONACTUAL": "Ubicación actual",
+    "P3:TXTCAMBIARUBICACION": "¿Cambiar?",
+
+    "P4:TXTMOSTRARPOR": "Mostrar por",
+    "P4:TXTBUSCAR": "Buscar",
+    "P5:LOCATION": "Ubicación",
+    "P5:VERMAPA": " Ver ubicación en el mapa",
+    "P5:UBICACION": "Ubicación: ",
+    "P5:WEB": "Web: ",
+    "P5:TEL": "Teléfono: ",
+    "P5:EMAIL": "Correo: ",
+
+    "P6:MAPAS": "Mapas",
+    "P6:COMERCIO": "Promociones",
+    "P6:CONFIGURACIONES": "Configuraciones",
+
+    "P7:ESCANEARPROMO": "Escanear promoción",
+    "P7:DISTANCIAAPROXIMADA": "Distancia aproximada",
+
+    "P3:PESOTXT": "Estas usando ",
+    "P3:PESOTXT1": " de espacio interno.",
+
+    "P2:TXTSTEPS": "¿Estás listo?",
+    "P2:TXTSTEPS1": "EMPECEMOS YA!",
+    "P2:TXTSTEPS2": "Te da la bienvenida",
+
+
+    "configuracion" : {
+      "actualizacion": "Verificando actualizaciones",
+      "ciudades": "Obteniendo ciudades disponibles...",
+      "contenido": "Actualizando contenido...",
+      "descargando": "Descargando imágenes y audios...",
+      "titulo_atencion": "Atención!",
+      "no_ciudad": "Esta ciudad no se encuentra dentro de nuestra base de datos",
+      "aceptar": "Aceptar",
+      "cancelar": "Cancelar",
+      "continuar": "Continuar",
+      "existe_mapa": "Ya tienes este mapa",
+      "descargar_mapa": "Es necesario descargar los mapas para navegar offline. Revisa que te encuentres conectado a una zona WiFi.",
+      "descargando_mapa": "Descargando mapa...",
+      "descomprimir": "Descomprimiendo contenido...",
+      "ubicacion_disponible": "Para continuar seleccione alguna de las ubicaciones disponibles.",
+      "eliminar": "Eliminando contenido...",
+      "confirmar_eliminar": "¿Deseas borrar el mapa actual?",
+      "eliminar_ok": "Mapa eliminado correctamente!",
+      "eliminar_error": "El mapa no se eliminó!",
+      "sin_mapa": "Aún no ha descargado el mapa de la ciudad seleccionada.",
+      "sin_mapa_descarga":"Aún no ha descargado el mapa de la ciudad seleccionada, desea descargarlo?"
+    },
+
+      "P6:VER_INFO_LOCAL":" Ver información del local",
+
+      "offlinemaps":{
+      "ubicacion":"Obteniendo tu ubicación",
+      "mapa_offline":"Cargando mapas..",
+      "tu_te_encuentras_aqui":"Tú te encuentras aquí"
+      },
+
+      "promotion_detail":{
+        "validando": "Validando",
+        "obteniendo_calificacion": "Obteniendo calificación",
+        "escanea":"Escanea el código QR",
+        "lo_sentimos": "Lo sentimos",
+        "qr":"El código Qr escaneado es inválido.",
+        "acceso_camara":"Permitir el uso de la cámara para acceder a esta funcionalidad.",
+        "qr2":"El código Qr escaneado es incorrecto o no pertenece a este establecimiento",
+        "exito":"Éxito",
+        "promocion_correcta":"Promoción escaneada correctamente.",
+        "ya_esta_escaneado":"Ya has escaneado esta promoción.",
+        "error_inesperado":"Error inesperado",
+        "aceptar":"Aceptar",
+        "sincronizando":"Sincronizando promociones escaneadas.."
+      }
+}

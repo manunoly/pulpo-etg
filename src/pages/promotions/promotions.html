@@ -1,0 +1,64 @@
+<ion-content>
+    <!-- barra de busqueda de la app-->
+    <ion-grid class="contenedor-filtros">
+        <ion-row class="buscador">
+            <ion-col col-12>
+                <div>
+                    <ion-searchbar debounce=500 (ionInput)="getItems($event)" placeholder="{{ 'P3:BARRABUSQUEDA' | translate }}"></ion-searchbar>
+                </div>
+            </ion-col>
+
+            <!---
+            <ion-col col-3>
+                <button ion-button color="primary" clear>Buscar</button>
+            </ion-col>
+            -->
+        </ion-row>
+
+        <div class="scrollmenu" *ngIf="storageDirectory" #categoriasScroll  id="categoriasScroll" scrollY="true" >
+            <ion-col col-4 *ngFor="let categoria of categorias">
+                <img class="promociones_img" [src]="storageDirectory+categoria.icono" alt="" (click)="filtrar(categoria)" >
+                <div class="texto"> {{categoria.nombre}} </div>
+            </ion-col>
+        </div>
+
+
+        <div class="">
+            <div class="controles izquierda"> <ion-icon name="ios-arrow-back"  (click)="scrollToLeft()" ></ion-icon>  </div>
+            <div class="controles derecha"> <ion-icon name="ios-arrow-forward" (click)="scrollToRight()" ></ion-icon>  </div>
+        </div>
+
+        <ion-row class="categorias" *ngIf="storageDirectory">
+            
+        </ion-row>
+
+    </ion-grid>
+
+    <ion-scroll scrollY="true"  class="listado">
+        <div *ngFor="let promocion of promociones" >
+
+            <ion-card [ngClass]="clase_x_tipo( promocion.categoria_id )" (click)="detalle(promocion)">
+
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-4 class="logo" [style.background]="'url('+storageDirectory+promocion.imagen+ ')'">
+                            
+                        </ion-col>
+                        <ion-col col-8 class="contenido">
+                            <h3>{{ promocion.titulo }}</h3> 
+                            {{ promocion.establecimiento }} <br>
+                            <span *ngIf="promocion.direccion" >{{ promocion.direccion }}</span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+            </ion-card>
+
+        </div>
+
+        <div *ngIf="promociones.length == 0 && estabuscando" class="no-items" text-center>
+            No se ha encontrado resultados
+        </div>
+    </ion-scroll>
+
+</ion-content>

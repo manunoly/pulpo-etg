@@ -1,0 +1,27 @@
+
+<ion-header>
+    
+  <ion-navbar color="primary" class="navtop">
+
+    <ion-buttons left>
+      <button ion-button menuToggle >
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    
+    <ion-title >Categorias</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar> <!-- barra de busqueda de la app-->
+  <ion-list>
+    <ion-item *ngFor="let establecimiento of establecimientos">    <!--Para listar los valores de un api--> 
+      {{establecimiento.nombre}}
+    </ion-item>
+  </ion-list>
+  
+</ion-content>

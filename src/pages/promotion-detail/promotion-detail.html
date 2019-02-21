@@ -1,0 +1,61 @@
+<ion-navbar [hidden]="true" *navbar>
+  <ion-title>.</ion-title>
+</ion-navbar>
+
+<ion-content >
+
+  <!--<img [src]="storageDirectory+promocion.imagen" class="img-promo" alt="">-->
+
+  <div class="promo-img"  *ngIf="!promocion.galeria" [style.background]="'url('+storageDirectory+promocion.imagen+ ')'"></div>
+
+
+   
+    
+  <ion-slides [paginationType]="bullets" [pager]="true" *ngIf="promocion.galeria">
+      <ion-slide *ngFor="let gal of  obtenerGalerias(promocion.galeria)">
+          <img img [src]="storageDirectory+gal" alt="">
+      </ion-slide>
+  </ion-slides>
+
+
+  <button class="btn-scan" ion-button color="primary" (click)="escanear()" >{{ 'P7:ESCANEARPROMO' | translate }}</button>
+
+  <ion-grid>
+
+    <ion-row class="content-promo">
+      <ion-col col-12 class="tienda">
+        {{ promocion.establecimiento }}
+
+        <div class="content-rating" *ngIf="promocion.scores">
+          <ion-icon class="rating"  *ngFor="let rating of promocion.scores" [name]="rating.icon ? 'star' : 'star-outline' "  ></ion-icon>
+          <div class="bottom"></div>
+        </div>
+
+      </ion-col>
+
+      <ion-col col-12 class="promo">
+          {{ promocion.titulo }}
+      </ion-col>
+
+      <ion-col col-12 class="detalle" [innerHTML]="promocion.small_des">
+
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+     <br>
+   <!-- <ion-label class="ver_mapa" *ngIf="promocion.direccion"><ion-icon name="pin" class="ubicacion"> </ion-icon> <b>{{ 'P5:UBICACION' | translate }}</b> {{promocion.direccion}}</ion-label>
+    <ion-label class="ver_mapa" *ngIf="promocion.web"><ion-icon name="desktop" class="ubicacion"> </ion-icon> <b>{{ 'P5:WEB' | translate }}</b> {{promocion.web}}</ion-label>
+    <ion-label class="ver_mapa" *ngIf="promocion.email"><ion-icon name="at" class="ubicacion"> </ion-icon> <b>{{ 'P5:EMAIL' | translate }}</b> {{promocion.email}}</ion-label>
+    <ion-label class="ver_mapa" *ngIf="promocion.telefono"><ion-icon name="call" class="ubicacion"> </ion-icon> <b>{{ 'P5:TEL' | translate }}</b> {{promocion.telefono}}</ion-label>-->
+    <ion-label class="ver_mapa" (click)="ver_info(promocion)"><ion-icon name="home" class="ubicacion"> </ion-icon>{{ 'P6:VER_INFO_LOCAL' | translate }}</ion-label>
+    <br>
+
+   <ion-label class="ver_mapa_ub" (click)="ver_mapa()"><ion-icon name="locate" class="ubicacion"> </ion-icon> {{ 'P5:VERMAPA' | translate }}</ion-label>
+  
+   <div class="cerrar" ion-fixed (click)="cerrar()">
+    <img src="assets/icon/close.png" >
+  </div>
+ 
+</ion-content>

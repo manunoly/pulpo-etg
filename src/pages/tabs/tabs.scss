@@ -1,0 +1,34 @@
+page-tabs {
+    .color-tab{
+        color: $tabs-color!important;
+    }
+
+    .tab-button-text{
+        padding: 5px 0 0 0;
+        font-size: 10px!important;
+        font-weight: 200;
+    }
+
+    .tabs-md .tab-button[aria-selected=true] {
+        color: $tabs-color!important;
+    }
+    .tabs-md .tab-button[aria-selected=true] .tab-button-icon{
+        color: $tabs-color!important;
+    }
+
+
+    .tabs-ios .tab-button[aria-selected=true]{
+        color: $tabs-color!important;
+    }
+    .tabs-ios .tab-button[aria-selected=true] .tab-button-icon{
+        color: $tabs-color!important;
+    }
+
+    ion-icon.tab-button-icon.icon.icon-ios.ion-ios-icon-burger {
+        animation: rubberBand 1s;
+    }
+    ion-icon.tab-button-icon.icon.icon-md.ion-md-icon-burger {
+        animation: rubberBand 1s;
+    }
+
+}

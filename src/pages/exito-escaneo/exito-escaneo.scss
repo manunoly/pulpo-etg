@@ -1,0 +1,43 @@
+page-exito-escaneo {
+
+    ion-content{
+        background: #f5f5f5!important;
+    }
+
+    .img-qr{
+        img{
+            margin-top: 10%;
+            width: 40%;
+        }
+    }
+
+
+    .mensaje{
+        margin-top: 5%;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .detalle{
+        margin-top: 2%;
+        font-size: 16px;
+    }
+
+
+    .votacion{
+        ion-icon{
+            font-size: 2.5rem;
+        }
+    }
+
+    .btn-continuar{
+        margin-top: 5%;
+        width: 100%;
+        height: 50px;
+        border-radius: 25px;
+        background-image: linear-gradient(278deg, #ff322e, #fbb034)!important;
+        background-image: linear-gradient(278deg, var(--orange-red), #fbb034);
+        box-shadow: 0 24px 24px -10px rgba(251, 176, 52, 0.5);
+    }
+
+}

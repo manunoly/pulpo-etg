@@ -1,0 +1,53 @@
+ceu
+PULPO
+clave: pulpo.developer
+
+
+BUILD ANDROID
+ionic cordova build android --release --prod   (PRIMERO)
+
+BUILD MAC OSX
+ionic cordova build ios --prod
+
+
+
+//iniciar firma una sola vez
+keytool -genkey -v -keystore my-release-key.keystore -alias etg -keyalg RSA -keysize 2048 -validity 10000
+
+
+FIRMA:
+(SEGUNDO)
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk etg
+C:\Users\henry\AppData\Local\Android\Sdk\build-tools\28.0.2\zipalign -v 4 ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk etg-V01.apk
+
+
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk etg
+~/Library/Android/sdk/build-tools/27.0.3/zipalign -v 4 ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk etg-V04.apk
+
+
+
+https://github.com/cowbell/cordova-plugin-geofence
+https://github.com/cowbell/cordova-plugin-geofence/issues/215
+https://github.com/katzer/cordova-plugin-background-mode/issues/264
+
+
+//version 6
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore ./platforms/android/build/outputs/apk/android-release-unsigned.apk etg
+
+
+
+
+
+
+
+
+V6 ANDROID
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore ./platforms/android/build/outputs/apk/android-release-unsigned.apk etg
+~/Library/Android/sdk/build-tools/27.0.3/zipalign -v 4 ./platforms/android/build/outputs/apk/android-release-unsigned.apk etg-V04.apk
+
+
+Wanderbus Ecuador
+-0.20798672124301185
+-78.48400455432284

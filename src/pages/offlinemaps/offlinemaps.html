@@ -1,0 +1,59 @@
+<ion-navbar [hidden]="true" *navbar>
+    <ion-title>.</ion-title>
+</ion-navbar>
+
+<ion-content>
+    <div id="map" [ngClass]="( active == true ) ? 'map-hide':''" >
+    </div>
+
+
+    <div id="buscador" class="buscador" [ngClass]="( active == true ) ? 'show-buscador':'hide-buscador'" >
+        <!-- barra de busqueda de la app-->
+        <ion-grid>
+            <ion-row>
+                <ion-col col-9>
+                    <div class="btnbuscar">
+                        <ion-searchbar placeholder="{{ 'P3:BARRABUSQUEDA' | translate }}" [(ngModel)]="busqueda" ></ion-searchbar>
+                    </div>
+                    </ion-col>
+                <ion-col col-3>
+                        <button ion-button color="primary" clear (click)="getItems(busqueda)" >{{ 'P4:TXTBUSCAR' | translate }}</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        
+        <ion-item no-lines class="txtmostrarpor">{{ 'P4:TXTMOSTRARPOR' | translate }}</ion-item>
+        <!--Cuadro con categorias-->
+        <div class="scrollmenu" *ngIf="categorias">
+            <a *ngFor="let categoria of categorias" (click)="filtrar(categoria.id)">
+                <img class="icon_buscador" [src]="storageDirectory+categoria.icono" alt="">{{ categoria.nombre }} </a>
+        </div>
+
+        <!--Cuadro con lugares -->
+        <ion-scroll scrollY="true" class="cuadro">
+            <ion-list *ngIf="markers.length > 0">
+                <div *ngFor="let marker of markers">
+                    <ion-item no-lines>
+                        <div class="row responsive-sm" (click)="presentDescriptionModal(marker)">
+                            <div class="ancho">
+                                <img [src]="storageDirectory+marker.icono" alt="" id="icono" >
+                            </div>
+                            <div class="ancho2">
+                                <div class="col-md-8" id="establecimiento" >{{ marker.nombre }}</div>
+                                <div class="col-md-8" id="direccion">{{ marker.direccion }}</div>
+                            </div>
+                            <div class="ancho3">
+                                <img [src]="storageDirectory+marker.logo" alt="" id="imagen">
+                            </div>
+                        </div>
+                    </ion-item>
+                </div>
+            </ion-list>
+        </ion-scroll>
+    </div>
+
+    <ion-fab right bottom>
+        <button ion-fab mini (click)="localizarme()"><ion-icon name="ios-locate-outline"></ion-icon></button>
+    </ion-fab>
+
+</ion-content>

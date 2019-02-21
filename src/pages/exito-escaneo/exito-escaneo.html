@@ -1,0 +1,47 @@
+<ion-navbar [hidden]="true" *navbar>
+  <ion-title>.</ion-title>
+</ion-navbar>
+
+<ion-content padding>
+
+  <br>
+
+  <ion-grid>
+
+    <ion-row class="exito">
+      <ion-col col-12 class="img-qr" text-center>
+       <img src="assets/icon/qr-code.png" alt="">
+      </ion-col>
+
+      <ion-col col-12 class="mensaje" text-center>
+         PROMOCIÓN ESCANEADA CON ÉXITO
+      </ion-col>
+
+      <ion-col col-1 ></ion-col>
+      <ion-col col-10 class="detalle" text-center>
+          ¿CÓMO FUE TU EXPERIENCIA EN {{ promocion.establecimiento }} ?
+      </ion-col>
+      <ion-col col-1 ></ion-col>
+
+      <ion-col col-12 >
+        <div class="content-rating" *ngIf="promocion.scores">
+          <ion-icon class="rating"  *ngFor="let rating of promocion.scores" [name]="rating.icon ? 'star' : 'star-outline' " (click)="calificar(promocion.establecimientos_id,rating.id)"  ></ion-icon>
+          <div class="bottom"></div>
+        </div>
+      </ion-col>
+
+    </ion-row>
+
+
+    <ion-col col-12 text-center>
+        <button class="btn-continuar" ion-button color="primary" (click)="continuar()" >CONTINUAR</button>
+    </ion-col>
+
+
+    
+
+  </ion-grid>
+
+
+
+</ion-content>

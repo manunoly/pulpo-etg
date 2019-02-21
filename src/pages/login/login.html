@@ -1,0 +1,108 @@
+<ion-content padding>
+<br>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 text-center class="logo">
+        <img src="assets/img/logotipo.png" alt="">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div padding>
+  <ion-segment [(ngModel)]="opcion">
+    <ion-segment-button value="iniciar">
+      {{ 'P2:SEGMENTO1' | translate }}
+    </ion-segment-button>
+    <ion-segment-button value="registrar">
+      {{ 'P2:SEGMENTO2' | translate }}
+    </ion-segment-button>
+  </ion-segment>
+  </div>
+
+
+<!--REGISTRO-->
+<div [ngSwitch]="opcion">
+  <ion-list *ngSwitchCase="'registrar'" >
+      <form #form="ngForm" (ngSubmit)="signup(form)" novalidate>
+          <ion-list>
+      
+            <ion-item>
+              <ion-label floating class="texto">{{ 'P2:REGNOMBRE' | translate }}:</ion-label>
+              <ion-input type="text" name="name" ngModel required #name="ngModel" [class.invalid]="name.errors && name.dirty"></ion-input>
+            </ion-item>
+      
+            <ion-item class="error-message" no-lines *ngIf="name.errors?.required && name.dirty">
+              {{ 'P2:NOMREQ' | translate }}
+            </ion-item>
+      
+            <ion-item>
+              <ion-label floating class="texto">{{ 'P2:REGEMAIL' | translate }}:</ion-label>
+              <ion-input type="email" name="email" ngModel required email #email="ngModel"  [class.invalid]="email.errors && email.dirty"></ion-input>
+            </ion-item>
+
+            <ion-item class="error-message" no-lines *ngIf="email.errors?.required && email.dirty">
+              {{ 'P2:EMAILREQ' | translate }}
+            </ion-item>
+      
+            <ion-item>
+              <ion-label floating class="texto">{{ 'P2:REGPASSWORD' | translate }}:</ion-label>
+              <ion-input type="password" name="password" ngModel required #password="ngModel" [class.invalid]="password.errors && password.dirty"></ion-input>
+            </ion-item>
+
+            <ion-item class="error-message" no-lines *ngIf="password.errors?.required && password.dirty">
+              {{ 'P2:PASSREQ' | translate }}
+            </ion-item>
+      
+            <div padding>
+              <button ion-button class="btnseleccionar"  block type="submit" [disabled]="!form.valid">{{ 'P2:REGBOTON' | translate }}</button>
+              <ion-label class="terminos">{{ 'P2:ACEPTERM1' | translate }}<b (click)="terminos()">{{ 'P2:ACEPTERM2' | translate }}</b>{{ 'P2:ACEPTERM3' | translate }}</ion-label>
+            </div>
+
+            <div padding >
+           
+            </div>
+
+          </ion-list>
+        </form>
+  </ion-list>
+ <!--INICIAR SESIÓN-->
+  <ion-list *ngSwitchCase="'iniciar'">
+    <form #form="ngForm" (ngSubmit)="login(form.value)" novalidate >
+      <ion-list >
+        <ion-item >
+          <ion-label class="txtlogin" floating>{{ 'P2:EMAIL' | translate }}</ion-label>
+          <ion-input type="text" name="email" ngModel required #email="ngModel"
+                     [class.invalid]="email.errors && email.dirty"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" no-lines *ngIf="email.errors?.required && email.dirty">
+          {{ 'P2:EMAILREQ' | translate }}
+        </ion-item> 
+  
+        <ion-item>
+          <ion-label class="txtlogin"  floating>{{ 'P2:PASSWORD' | translate }}:</ion-label>
+          <ion-input type="password" name="password" ngModel required #password="ngModel"
+                     [class.invalid]="password.errors && password.dirty"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" no-lines *ngIf="password.errors?.required && password.dirty">
+          {{ 'P2:PASSREQ' | translate }}
+        </ion-item>
+  
+        <br/>
+        
+        <div padding>
+         
+          <div class="recordar"><ion-checkbox class="checkbox"></ion-checkbox> {{ 'P2:RECORDARC' | translate }}</div>
+          <button ion-button class="btnseleccionar"  block type="submit" [disabled]="!form.valid">{{ 'P2:INICIAR' | translate }}</button>
+        </div>
+        <div padding>
+            <div class="recordar" (click)="resetpassword()">{{ 'P2:OLVIDOCON' | translate }}</div>
+        </div>
+        </ion-list> 
+    </form>
+  </ion-list>
+</div>
+
+
+
+</ion-content>

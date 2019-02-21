@@ -1,0 +1,130 @@
+page-promotions {
+    ion-content{
+        background: #f5f5f5!important;
+    }
+
+    .contenedor-filtros{
+        margin-top: 5%;
+        height:155px;
+        //background:red;
+    }
+
+    .listado{
+        height: calc(100% - 170px);
+        //background: #001566;
+        .scroll-content{
+            padding-top: 0!important;
+            margin-top: -1%;
+        }
+    }
+    
+    .buscador{
+        button{
+            margin-top: 8%;
+        }
+    }
+
+    .searchbar-clear-icon {
+        margin-top: -1%!important;
+    }
+
+    .categorias{
+        text-align: center;
+        margin-top: 2%;
+    }
+
+    .scrollmenu {
+        margin-top: 3%;
+        overflow: auto;
+        white-space: nowrap;
+        height: 80px;
+        position: relative;
+    }
+    .scrollmenu ion-col  {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 0px 11px 6px 10px;
+        text-decoration: none;
+        font-size: 1.5rem;
+        animation: bounceInRight 1.8s;
+    }
+    .controles{
+        position: absolute;
+        font-size: 2.5rem; 
+        color: #ff322e;
+        top:0;
+        margin-top: 29%;
+    }
+    .derecha{
+        right: 0;
+        margin-right: 2%;
+    }
+    .izquierda{
+        left: 0;
+        margin-left: 2%;
+    }
+
+
+    ion-card{
+        animation: fadeInDown 1s;
+        border-radius: 5px!important;
+        color: #fff!important;
+        .logo{
+            margin-top:10px;
+            height: 92px;
+            background-repeat:no-repeat!important;
+            background-size:cover!important;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+        .contenido{
+            h3{
+                color: #fff!important;
+                font-weight: 600;
+                font-size: 16px;
+                margin-bottom: 3%;
+            }
+            span{
+                font-size: 12px;
+            }
+        }
+    }
+
+    
+    .restaurantes{
+        background-image: linear-gradient(to left, #ff9b5b 0%, #ff322e)!important;
+        background-image: linear-gradient(to left, #ff9b5b 0%, var(--orange-red));
+        box-shadow: 0 12px 24px -6px rgba(255, 50, 46, 0.5);
+    }
+    .bares{
+        background-image: linear-gradient(to left, #a02bff, #6713fe)!important;
+        background-image: linear-gradient(to left, #a02bff, var(--purplish-blue));
+        box-shadow: 0 12px 24px -6px rgba(103, 19, 254, 0.3);
+    }
+    .discotecas{
+        background-image: linear-gradient(to left, #0090cf, #001566)!important;
+        background-image: linear-gradient(to left, #0090cf, var(--dark-blue));
+        box-shadow: 0 12px 24px -6px rgba(0, 21, 102, 0.5);
+    }
+
+    .promociones_img{
+        height: 50px;
+        width: auto;
+    }
+
+    .texto{
+        white-space:normal;
+        overflow: hidden;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: -0.4px;
+        text-align: center;
+        color: #4a4a4a;
+        font-size: 10px !important;
+        height: 25px;
+    }
+    
+
+}

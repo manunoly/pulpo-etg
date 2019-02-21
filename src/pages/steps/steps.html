@@ -1,0 +1,30 @@
+
+
+<ion-content class="steps-page">
+
+    <ion-slides pager>
+      <ion-slide>
+        <!-- <ion-toolbar>
+        </ion-toolbar>-->
+        <!-- <img src="assets/img/ica-slidebox-img-4.png" class="slide-image"/> -->
+        <h2 class="slide-title">{{ 'P2:TXTSTEPS' | translate }}</h2>
+  
+        <div class="store" *ngIf="suscription_data" >
+
+          <p>{{ 'P2:TXTSTEPS2' | translate }}</p>
+        </div>
+  
+        <div class="slider-final-button">
+  
+        <button (click)="goLogin()" class="start" ion-button large clear icon-end color="primary">
+          {{ 'P2:TXTSTEPS1' | translate }}
+          <ion-icon name="arrow-round-forward"></ion-icon>
+        </button>
+  
+        </div>
+        
+      </ion-slide>
+    </ion-slides>
+  
+  </ion-content>
+  

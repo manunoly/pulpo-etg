@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+ <h2 style="text-align: center">Registrarse</h2>
+  <p>
+   Prueba login
+  </p>
+  <p  *ngFor="let cat of category">
+    {{ cat.name }}
+  </p>
+
+  <div class = "card">
+      <div class = "item">
+         This is a Ionic card without item-text-wrap class.
+      </div>
+      
+      <div class = "item item-text-wrap">
+         This is a Ionic card with item-text-wrap class.
+      </div>
+   </div>
+</ion-content>

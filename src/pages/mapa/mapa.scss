@@ -1,0 +1,28 @@
+page-mapa {
+
+    #map1 { 
+        height: 100%;
+        width: 100%;
+        position: relative;
+     }
+    .header-ios{
+        top: 3%;
+    }
+    .content-ios .scroll-content{
+        top: 2%;
+    }
+
+    .info {
+        position: absolute;
+        z-index: 999;
+        width: 60%;
+        background: rgba(0, 0, 0, 0.5);
+        top: 0;
+        right: 0;
+        margin-top: 1%;
+        margin-right: 1%;
+        padding: 10px;
+        color: #fff;
+    }
+
+}

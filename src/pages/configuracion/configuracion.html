@@ -1,0 +1,82 @@
+
+<ion-content padding>
+    <div class="configuracion">{{ 'P3:TITULO3' | translate }}</div>
+    <div padding>
+        <ion-segment [(ngModel)]="opcion">
+          <ion-segment-button value="mapas">
+            {{ 'P3:SEGMENTO1' | translate }}
+          </ion-segment-button>
+          <!--<ion-segment-button value="promociones" [disabled]="true">
+            {{ 'P3:SEGMENTO2' | translate }}
+          </ion-segment-button>-->
+        </ion-segment>
+      </div>
+ <br>
+ <!--PROMOCIONES-->
+ <div [ngSwitch]="opcion">
+   <!--+ <ion-list *ngSwitchCase="'promociones'" >
+    </ion-list>-->
+
+  <!--MAPAS-->
+  <ion-list *ngSwitchCase="'mapas'">
+    <form #form="ngForm" novalidate >
+      <!-- barra de busqueda de la app-->
+        <div class="btnbuscar"> <ion-searchbar (ionInput)="getItems($event)" placeholder="{{ 'P3:BARRABUSQUEDA' | translate }}" ></ion-searchbar></div>
+        <!--Ubicacion y ciudad actual-->
+        <div class = "row responsive-sm" *ngIf="ciudad_actual !== '' ">
+              <div class = "col"><ion-item class="ubicacion" no-lines>{{ 'P3:UBICACION' | translate }}</ion-item></div>
+              <div class = "col"><ion-item class="ubicacion2" no-lines>{{ciudad_actual}}</ion-item></div>
+              <!--<button ion-button icon-only class="descarga" (click)='btndescargageo(ciudad_actual)'>
+            <ion-icon name={{icono_geo}}></ion-icon></button>-->
+        </div>
+        <div class="ubicacion_actual" *ngIf="ciudad_actual !== '' " >{{ 'P3:TXTUBICACIONACTUAL' | translate }}</div>
+        <!--<div class="cambiar" (click)='alertciudades()'>{{ 'P3:TXTCAMBIARUBICACION' | translate }}</div>--><br>
+        <!--Cuadro con mapas descargados-->
+        <ion-scroll scrollY="true"  class="cuadro">
+          {{ 'P3:MISMAPAS' | translate }}
+           <ion-list>
+              <div *ngFor="let mapa of mapas_disponibles">
+                  <ion-item-sliding #slidingItem *ngIf="mapa.archivo">
+                    <!-- <ion-item no-lines>
+                      <div class = "row responsive-sm">
+                            <div class = "col" (click)="ciudad_seleccionada(mapa)"> <ion-item [ngClass]="(ciudad_usar == mapa.nombre ) ? 'ciudad-selecionada':'' " >{{ mapa.nombre }}</ion-item></div>
+                            <div class = "col"><ion-item><b>{{ mapa.peso }} Mb</b></ion-item></div>
+                            <button class="descarga" ion-button icon-only (click)='btndescarga(mapa)'>
+                              <ion-icon name="{{ mapa.icono }}"></ion-icon>
+                            </button>
+                            <ion-toggle checked="false"></ion-toggle>
+                      </div>
+                    </ion-item> -->
+
+                    <ion-item>
+                        <ion-label>
+                      <ion-row>
+                        <ion-col (click)="ciudad_seleccionada(mapa)" tappable [ngClass]="(ciudad_usar == mapa.nombre ) ? 'ciudad-selecionada':'' " >
+                            {{ mapa.nombre }}
+                        </ion-col>
+                        <ion-col>
+                            {{ mapa.peso }} Mb
+                        </ion-col>
+                      </ion-row>
+                    </ion-label>
+                    <ion-toggle checked="checkExist(mapa)" (ionChange)="btndescarga(mapa, $event.checked)"></ion-toggle>
+                      </ion-item>
+                    <ion-item-options side="left">
+                      <button ion-button class="boton_eliminar" (click)="eliminarmapa(mapa)"><ion-icon name="remove-circle"></ion-icon>Eliminar</button>
+                    </ion-item-options>
+                </ion-item-sliding>
+              </div>
+           </ion-list>
+          </ion-scroll>
+
+        <!--Peso de los archivos descargados-->
+       <div class="pesocuadro">
+         <div class="peso">{{ 'P3:PESOTXT' | translate }}<b>{{suma_mapas}} Mb</b>{{ 'P3:PESOTXT1' | translate }}</div>
+      </div>
+      <!--Ingreso a los mapas offline-->
+      <button [disabled]="!ciudad_offline"  (click)="ciudadDescarga()" class="btnseleccionar"><p>{{ 'P3:BOTON3' | translate }}</p></button>
+    </form>
+  </ion-list>
+</div>
+
+</ion-content>
