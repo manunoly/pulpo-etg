@@ -35,7 +35,7 @@
         <ion-scroll scrollY="true"  class="cuadro">
           {{ 'P3:MISMAPAS' | translate }}
            <ion-list>
-              <div *ngFor="let mapa of mapas_disponibles">
+              <div *ngFor="let mapa of mapas_disponibles; let i = index">
                   <ion-item-sliding #slidingItem *ngIf="mapa.archivo">
                     <!-- <ion-item no-lines>
                       <div class = "row responsive-sm">
@@ -51,6 +51,10 @@
                     <ion-item>
                         <ion-label>
                       <ion-row>
+                        <div *ngIf="first && i == 0">
+                          <div *ngIf="ciudad_seleccionada(mapa)">
+                          </div>
+                        </div>
                         <ion-col (click)="ciudad_seleccionada(mapa)" tappable [ngClass]="(ciudad_usar == mapa.nombre ) ? 'ciudad-selecionada':'' " >
                             {{ mapa.nombre }}
                         </ion-col>

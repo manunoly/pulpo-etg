@@ -36,7 +36,7 @@ export class ConfiguracionPage {
   loading:any;
   parametros:string;
   suma_mapas: any;
-
+  first = true;
   listado_ciudades:any;
   archivos_descarga: any = [];
   actualizacion: any = [];
@@ -1071,7 +1071,7 @@ obtener_mapas() {
   ciudad_usar: string;
   coordenadas: any;
   ciudad_seleccionada(mapa) {
-
+    this.first = false;
     this.all_mapa_seleccionado = mapa;
     let info_archivo = JSON.parse( mapa['archivo'] );
 
