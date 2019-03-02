@@ -39,7 +39,7 @@ export class OfflinemapsPage {
   mensajes: any = [];
   fence: any = [];
   distancia:number = 40;
-
+  showPromo = false;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
@@ -187,7 +187,14 @@ export class OfflinemapsPage {
       content: this.mensajes.ubicacion
     });
     loading.present();
-
+    setTimeout(() => {
+      this.carga_establecimientos('y ver mapa');
+      this.carga_categorias();
+      loading.dismiss();
+      setTimeout(() => {
+        this.showpromoF();
+      }, 2000);
+    }, 2000);
     // let watch = this.geolocation.watchPosition(); 
     // watch.subscribe((data) => {
       let options = {
@@ -217,16 +224,15 @@ export class OfflinemapsPage {
     }).catch(e=>{
       console.log(e);
     });
-
-    setTimeout(() => {
-      this.carga_establecimientos('y ver mapa');
-      this.carga_categorias();
-      loading.dismiss();
-    }, 2000);
     
   }
 
-
+  showpromoF(){
+    this.showPromo = true;
+    setTimeout(() => {
+      this.showPromo = false;
+    }, 4000);
+  }
 
 
 
