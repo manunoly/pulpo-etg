@@ -3,6 +3,10 @@
 </ion-navbar>
 
 <ion-content>
+    <div class="info" *ngIf="showPromo" >
+        {{ 'P8:PROMOCION' | translate }}<br><br>
+    </div>
+        
     <div id="map" [ngClass]="( active == true ) ? 'map-hide':''" >
     </div>
 
