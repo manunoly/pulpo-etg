@@ -188,9 +188,14 @@ export class OfflinemapsPage {
     });
     loading.present();
 
-    let watch = this.geolocation.watchPosition();
-    watch.subscribe((data) => {
-      console.log('Localizacion en tiempo real:',data);
+    // let watch = this.geolocation.watchPosition(); 
+    // watch.subscribe((data) => {
+      let options = {
+        timeout: 50000,
+        enableHighAccuracy : false,
+      };
+      
+      this.geolocation.getCurrentPosition(options).then((data) => {  
 
       self.latitud = data.coords.latitude;
       self.longitud = data.coords.longitude;
@@ -209,6 +214,8 @@ export class OfflinemapsPage {
         .bindPopup("Tu te encuentras aquí").openPopup();
       }
 
+    }).catch(e=>{
+      console.log(e);
     });
 
     setTimeout(() => {
@@ -416,7 +423,7 @@ export class OfflinemapsPage {
   }
 
 
-  localizarme(){
+  async localizarme(){
     
     if(this.mi_marcador){
       this.map.removeLayer(this.mi_marcador);
