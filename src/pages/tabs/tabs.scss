@@ -9,9 +9,29 @@ page-tabs {
         font-weight: 200;
     }
 
+    a.tab-button:nth-of-type(2) {
+		color: #000000;
+		.tab-button-icon {
+			color: #000000;
+		}
+    }
+    
+    // #tab-t0-1{
+    //     color: #c49137;
+    //     background-color: red !important;
+    //     font-size: 20px!important;
+    //     font-weight: 300;
+        
+    // }
+
+    .tabs-icon-top .tab .nav-view-home {
+        color: #c49137;
+    }
+    
     .tabs-md .tab-button[aria-selected=true] {
         color: $tabs-color!important;
     }
+
     .tabs-md .tab-button[aria-selected=true] .tab-button-icon{
         color: $tabs-color!important;
     }
