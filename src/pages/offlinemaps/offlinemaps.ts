@@ -195,20 +195,23 @@ export class OfflinemapsPage {
         this.showpromoF();
       }, 2000);
     }, 2000);
-    // let watch = this.geolocation.watchPosition(); 
-    // watch.subscribe((data) => {
-      let options = {
-        timeout: 50000,
-        enableHighAccuracy : false,
-      };
+    let watch = this.geolocation.watchPosition(); 
+    watch.subscribe((data) => {
+      // let options = {
+      //   timeout: 50000,
+      //   enableHighAccuracy : false,
+      // };
       
-      this.geolocation.getCurrentPosition(options).then((data) => {  
+      // this.geolocation.getCurrentPosition(options).then((data) => {  
 
       self.latitud = data.coords.latitude;
       self.longitud = data.coords.longitude;
    
       if(this.mi_marcador){
-        self.map.removeLayer(this.mi_marcador);
+        var newLatLng = new L.LatLng(data.coords.latitude , data.coords.longitude);
+        this.mi_marcador.setLatLng(newLatLng); 
+        return;
+        // self.map.removeLayer(this.mi_marcador);
       }
 
       var firefoxIcon = L.icon({
@@ -221,8 +224,6 @@ export class OfflinemapsPage {
         .bindPopup("Tu te encuentras aquí").openPopup();
       }
 
-    }).catch(e=>{
-      console.log(e);
     });
     
   }
