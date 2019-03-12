@@ -209,8 +209,13 @@ export class OfflinemapsPage {
    
       if(this.mi_marcador){
         var newLatLng = new L.LatLng(data.coords.latitude , data.coords.longitude);
-        this.mi_marcador.setLatLng(newLatLng); 
-        return;
+        this.mi_marcador.setLatLng(newLatLng);
+        try {
+          this.mi_marcador.closePopup(); 
+          return
+        } catch (error) {
+          return
+        }
         // self.map.removeLayer(this.mi_marcador);
       }
 
@@ -222,6 +227,9 @@ export class OfflinemapsPage {
       if(data.coords && this.map){
         self.mi_marcador = L.marker([ data.coords.latitude , data.coords.longitude ], { icon: firefoxIcon }).addTo(this.map)
         .bindPopup("Tu te encuentras aquí").openPopup();
+        setTimeout(() => {
+          this.mi_marcador.closePopup(); 
+        }, 2000);
       }
 
     });
@@ -433,7 +441,22 @@ export class OfflinemapsPage {
   async localizarme(){
     
     if(this.mi_marcador){
-      this.map.removeLayer(this.mi_marcador);
+      let options = {
+        enableHighAccuracy : false
+      };
+      this.geolocation.getCurrentPosition(options).then((resp) => {
+        this.latitud=resp.coords.latitude
+        this.longitud=resp.coords.longitude
+      var newLatLng = new L.LatLng(this.latitud, this.longitud);
+      this.mi_marcador.setLatLng(newLatLng);
+      try {
+        this.mi_marcador.closePopup(); 
+        this.map.panTo(new L.LatLng(this.latitud , this.longitud));
+        return
+      } catch (error) {
+        return
+      }
+      }).catch();
     }
 
     var firefoxIcon = L.icon({
@@ -441,10 +464,22 @@ export class OfflinemapsPage {
       iconSize: [33, 50], // size of the icon
     });
   
-    if(this.latitud && this.map){
-      this.mi_marcador = L.marker([ this.latitud , this.longitud ], { icon: firefoxIcon }).addTo(this.map)
-      .bindPopup("Tu te encuentras aquí").openPopup();
-    }
+      if(this.map){
+        let options = {
+          enableHighAccuracy : false
+        };
+        this.geolocation.getCurrentPosition(options).then((resp) => {
+          this.latitud=resp.coords.latitude
+          this.longitud=resp.coords.longitude
+          console.log("Error en latitud y longitud", this.latitud,this.longitud);
+          this.mi_marcador = L.marker([this.latitud,this.longitud], { icon: firefoxIcon }).addTo(this.map)
+          .bindPopup("Tu te encuentras aquí").openPopup();
+          setTimeout(() => {
+            if(this.mi_marcador)
+              this.mi_marcador.closePopup(); 
+          }, 2000);
+        }).catch();
+      }
 
     this.map.panTo(new L.LatLng(this.latitud , this.longitud));
 
