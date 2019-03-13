@@ -208,15 +208,7 @@ export class OfflinemapsPage {
       self.longitud = data.coords.longitude;
    
       if(this.mi_marcador){
-        var newLatLng = new L.LatLng(data.coords.latitude , data.coords.longitude);
-        this.mi_marcador.setLatLng(newLatLng);
-        try {
-          this.mi_marcador.closePopup(); 
-          return
-        } catch (error) {
-          return
-        }
-        // self.map.removeLayer(this.mi_marcador);
+        self.map.removeLayer(this.mi_marcador);
       }
 
       var firefoxIcon = L.icon({
@@ -441,22 +433,7 @@ export class OfflinemapsPage {
   async localizarme(){
     
     if(this.mi_marcador){
-      let options = {
-        enableHighAccuracy : false
-      };
-      this.geolocation.getCurrentPosition(options).then((resp) => {
-        this.latitud=resp.coords.latitude
-        this.longitud=resp.coords.longitude
-      var newLatLng = new L.LatLng(this.latitud, this.longitud);
-      this.mi_marcador.setLatLng(newLatLng);
-      try {
-        this.mi_marcador.closePopup(); 
-        this.map.panTo(new L.LatLng(this.latitud , this.longitud));
-        return
-      } catch (error) {
-        return
-      }
-      }).catch();
+      this.map.removeLayer(this.mi_marcador);
     }
 
     var firefoxIcon = L.icon({
@@ -464,24 +441,14 @@ export class OfflinemapsPage {
       iconSize: [33, 50], // size of the icon
     });
   
-      if(this.map){
-        let options = {
-          enableHighAccuracy : false
-        };
-        this.geolocation.getCurrentPosition(options).then((resp) => {
-          this.latitud=resp.coords.latitude
-          this.longitud=resp.coords.longitude
-          console.log("Error en latitud y longitud", this.latitud,this.longitud);
-          this.mi_marcador = L.marker([this.latitud,this.longitud], { icon: firefoxIcon }).addTo(this.map)
-          .bindPopup("Tu te encuentras aquí").openPopup();
-          setTimeout(() => {
-            if(this.mi_marcador)
-              this.mi_marcador.closePopup(); 
-          }, 2000);
-        }).catch();
-      }
+    if(this.latitud && this.map)
+      this.mi_marcador = L.marker([ this.latitud , this.longitud ], { icon: firefoxIcon }).addTo(this.map)
 
     this.map.panTo(new L.LatLng(this.latitud , this.longitud));
+    
+    setTimeout(() => {
+       this.mi_marcador.closePopup(); 
+    }, 2000);
 
   }
 
@@ -508,6 +475,9 @@ export class OfflinemapsPage {
       self.mi_marcador = L.marker(e.latlng, { icon: firefoxIcon }).addTo(this.map)
       .bindPopup(this.mensajes.tu_te_encuentras_aqui).openPopup();
       //L.circle(e.latlng).addTo(this.map);
+      setTimeout(() => {
+        self.mi_marcador.closePopup(); 
+      }, 2000);
 
     }).on('locationerror', (err) => {
       console.log('ERROR MAPA', err);
