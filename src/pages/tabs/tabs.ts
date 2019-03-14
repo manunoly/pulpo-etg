@@ -28,7 +28,7 @@ export class TabsPage {
     public events: Events
   ) {
 
-    this.myIndex = this.navParams.data.tabIndex || 0;
+    this.myIndex = this.navParams.data.tabIndex || 0; 
     //console.log('INFORMACION', navParams.get("ciudad") );
 
     this.tab1Root = 'OfflinemapsPage';

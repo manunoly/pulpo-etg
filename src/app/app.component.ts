@@ -60,7 +60,6 @@ export class MyApp {
       this.geofence.onNotificationClicked()
       .subscribe(
       (resp) => {
-        console.log("RESULTADO DE LA NOTIFICACION", resp);
         this.st.set('ls_notification_promo',resp);
       },
       (err) => {

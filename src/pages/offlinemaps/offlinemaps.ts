@@ -9,6 +9,7 @@ import { Network } from '@ionic-native/network';
 import { Geofence } from '@ionic-native/geofence';
 import { TranslateService } from '@ngx-translate/core';
 declare var cordova: any;
+import { ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -40,6 +41,7 @@ export class OfflinemapsPage {
   fence: any = [];
   distancia:number = 40;
   showPromo = false;
+  msg;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
@@ -53,7 +55,8 @@ export class OfflinemapsPage {
     private geolocation: Geolocation,
     private network: Network,
     private geofence: Geofence,
-    translate: TranslateService
+    translate: TranslateService,
+    public toastCtrl: ToastController
   ) {
 
     this.st.get('ls_notificacion').then((resultado) => {
@@ -134,7 +137,13 @@ export class OfflinemapsPage {
 
   }
 
- 
+  presentToast() {
+    const toast = this.toastCtrl.create({
+      message: this.msg,
+      duration: 5000,
+    });
+    toast.present();
+  }
 
 
   private addGeofence() {
@@ -165,7 +174,7 @@ export class OfflinemapsPage {
         this.fence.push(data);
       }
 
-      console.log( this.fence );
+      // console.log( this.fence );
 
       this.geofence.addOrUpdate(this.fence).then(
         () => console.log('Geofence added'),
@@ -179,8 +188,6 @@ export class OfflinemapsPage {
 
   //VISTA DE LOS MAPAS OFFLINE Y ONLINE
   ionViewDidEnter() {
-
-    let self = this;
 
     let loading = this.loadingCtrl.create({
       spinner: 'bubbles',
@@ -204,11 +211,17 @@ export class OfflinemapsPage {
       
       // this.geolocation.getCurrentPosition(options).then((data) => {  
 
-      self.latitud = data.coords.latitude;
-      self.longitud = data.coords.longitude;
-   
+      this.latitud = data.coords.latitude;
+      this.longitud = data.coords.longitude;
+      let update = true;
       if(this.mi_marcador){
-        self.map.removeLayer(this.mi_marcador);
+        // this.msg="actualizo el marcador watch";
+        // this.presentToast();
+        // var newLatLng = new L.LatLng(data.coords.latitude , data.coords.longitude);
+        this.mi_marcador.setLatLng([data.coords.latitude , data.coords.longitude]);
+        update = false;
+        return;
+        
       }
 
       var firefoxIcon = L.icon({
@@ -216,12 +229,13 @@ export class OfflinemapsPage {
         iconSize: [33, 50], // size of the icon
       });
 
-      if(data.coords && this.map){
-        self.mi_marcador = L.marker([ data.coords.latitude , data.coords.longitude ], { icon: firefoxIcon }).addTo(this.map)
-        .bindPopup("Tu te encuentras aquí").openPopup();
-        setTimeout(() => {
-          this.mi_marcador.closePopup(); 
-        }, 2000);
+      if(data.coords && this.map && update){
+        try {
+          this.map.removeLayer(this.mi_marcador);
+        } catch (error) {
+          
+        }
+        this.mi_marcador = L.marker([ data.coords.latitude , data.coords.longitude ], { icon: firefoxIcon }).addTo(this.map);
       }
 
     });
@@ -339,6 +353,8 @@ export class OfflinemapsPage {
 
     if(this.mi_marcador){
       self.map.removeLayer(this.mi_marcador);
+      // this.msg = "voy a borrar el marcador en actualizar_map";
+      // this.presentToast();
     }
     
     this.carga_marcadores();
@@ -433,7 +449,26 @@ export class OfflinemapsPage {
   async localizarme(){
     
     if(this.mi_marcador){
-      this.map.removeLayer(this.mi_marcador);
+      let options = {
+        enableHighAccuracy : false
+      };
+      this.geolocation.getCurrentPosition(options).then((resp) => {
+        this.latitud=resp.coords.latitude
+        this.longitud=resp.coords.longitude
+         try { 
+        // this.map.removeLayer(this.mi_marcador);
+        // var newLatLng = new L.LatLng(this.latitud, this.longitud);
+        this.mi_marcador.setLatLng([this.latitud, this.longitud]);
+        this.mi_marcador.closePopup(); 
+        this.map.panTo(new L.LatLng(this.latitud , this.longitud));
+        // this.msg="actualizo el marcador localizame";
+        // this.presentToast();
+
+        return
+      } catch (error) {
+        return
+      }
+      }).catch();
     }
 
     var firefoxIcon = L.icon({
@@ -441,10 +476,17 @@ export class OfflinemapsPage {
       iconSize: [33, 50], // size of the icon
     });
   
-    if(this.latitud && this.map)
-      this.mi_marcador = L.marker([ this.latitud , this.longitud ], { icon: firefoxIcon }).addTo(this.map)
+    if(this.latitud && this.map){
+      try {
+              this.map.removeLayer(this.mi_marcador);
+      } catch (error) {}
+      this.mi_marcador = L.marker([ this.latitud , this.longitud ], { icon: firefoxIcon }).addTo(this.map);
+    }
 
     this.map.panTo(new L.LatLng(this.latitud , this.longitud));
+    // this.msg="creo el marcador localizame";
+    // this.presentToast();
+  
     
     setTimeout(() => {
        this.mi_marcador.closePopup(); 
@@ -472,6 +514,12 @@ export class OfflinemapsPage {
         iconSize: [33, 50], // size of the icon
       });
 
+      if(this.mi_marcador){
+        this.map.removeLayer(this.mi_marcador);
+        // this.msg = "borro el marcador cuando voy a cargar los marcadores";
+        // this.presentToast();
+      }
+      
       self.mi_marcador = L.marker(e.latlng, { icon: firefoxIcon }).addTo(this.map)
       .bindPopup(this.mensajes.tu_te_encuentras_aqui).openPopup();
       //L.circle(e.latlng).addTo(this.map);

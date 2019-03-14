@@ -22,14 +22,15 @@ export class SplashPage {
     this.proveedor.checkLogin();
 
     this.proveedor.authUser.subscribe(jwt => {
-      console.log("SESION ---->",jwt);
+      
       if (jwt) {
-        
-        this.st.get('ls_notification_promo').then( (notificacion) => {
-          console.log('LS ----------->', notificacion);
+        console.log("SESION ---->",jwt);
+        this.st.get('ls_notification_promo').then(notificacion => {
+          // this.st.set('ls_notification_promo',null);
+          // console.log(':::::::::::::::::::::::LS ----------->', notificacion);
           if(notificacion){
             //this.navCtrl.setRoot('ConfiguracionPage')
-            this.navCtrl.setRoot('TabsPage', { ciudad: notificacion.ciudad.toLowerCase(), valor: false, coordenadas: [ parseFloat(notificacion.ciudad_lat), parseFloat(notificacion.ciudad_log) ], id_ciudad: notificacion.id_ciudad,  tabIndex: 1, store_id: notificacion.establecimientos_id });
+            this.navCtrl.setRoot('TabsPage', { ciudad: notificacion.ciudad?notificacion.ciudad.toLowerCase():'Quito', valor: false, coordenadas: [ parseFloat(notificacion.ciudad_lat), parseFloat(notificacion.ciudad_log) ], id_ciudad: notificacion.id_ciudad,  tabIndex: 1, store_id: notificacion.establecimientos_id });
           }else{
             this.navCtrl.setRoot('ConfiguracionPage');
           }
