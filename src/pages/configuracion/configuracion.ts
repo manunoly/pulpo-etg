@@ -1095,7 +1095,7 @@ obtener_mapas() {
 
     console.log('Parametros que se envian: ' , this.ciudad_offline ,this.coordenadas, this.id_ciudad);
     
-    if(!this.isDevice) {
+    if(!this.isDevice) { 
       this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: true, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad });
       return;
     }

@@ -1,13 +1,14 @@
 {
-  "name": "App1",
+  "name": "etg",
   "integrations": {
     "cordova": {}
   },
+  "type": "ionic-angular",
   "proxies": [
     {
       "path": "/etgbackend-pulpo/public/index.php/api",
       "proxyUrl": "https://pulpo.digital"
     }
   ],
-  "type": "ionic-angular"
+  "id": "c8366713"
 }

@@ -133,13 +133,11 @@ export class OfflinemapsPage {
       },
       (err) => console.log(err)
     )
-
-
   }
 
-  presentToast() {
+  presentToast(msg) {
     const toast = this.toastCtrl.create({
-      message: this.msg,
+      message: msg,
       duration: 5000,
     });
     toast.present();
@@ -155,7 +153,7 @@ export class OfflinemapsPage {
 
       for (let i = 0; i < resultado.length; i++) {
 
-        console.log(parseFloat(resultado[i]['latitud']), parseFloat(resultado[i]['longitud']));
+        // console.log(parseFloat(resultado[i]['latitud']), parseFloat(resultado[i]['longitud']));
         let data = {
           id: resultado[i]['id'], //any unique ID
           latitude: parseFloat(resultado[i]['latitud']), //center of geofence radius
@@ -168,16 +166,34 @@ export class OfflinemapsPage {
             text: resultado[i]['titulo'], //notification body
             icon: this.storageDirectory+resultado[i]['logo'],
             openAppOnClick: true, //open app when notification is tapped
-            data: resultado[i]
+            data: {store_id:resultado[i].establecimientos_id, ciudad: resultado[i].ciudad?resultado[i].ciudad:'Quito', id_ciudad:resultado[i].id_ciudad?resultado[i].id_ciudad:5, valor: false, ciudad_lat:parseFloat(resultado[i]['latitud']),ciudad_log:parseFloat(resultado[i]['longitud'])}
           }
         } 
         this.fence.push(data);
+        // console.log(data.notification.data);
       }
 
       // console.log( this.fence );
 
       this.geofence.addOrUpdate(this.fence).then(
-        () => console.log('Geofence added'),
+        respuesta => {
+          // this.presentToast(this.fence.length + 'added' + respuesta);
+          // this.geofence.onTransitionReceived().subscribe((notificacion) => {
+          //   this.presentToast(notificacion?JSON.stringify(notificacion):'onTransitionReceived');
+          // });
+          // this.geofence.onNotificationClicked()
+          // .subscribe(
+          // (notificacion) => {
+          //   // this.presentToast(notificacion?JSON.stringify(notificacion):'onNotificationClicked subscription');
+          //   this.st.set('ls_notification_promo',notificacion);
+          //   this.navCtrl.setRoot('PromotionsPage', { tabIndex: 1, store_id: notificacion.store_id });
+          // },
+          // (err) => {
+          //   // this.presentToast('ERROR NOTIFICACION'+JSON.stringify(err));
+          //   this.st.set('ls_notification_promo',undefined);
+          // });
+        
+        },
         (err) => console.log('Geofence failed to add', err)
       );
 
@@ -188,10 +204,19 @@ export class OfflinemapsPage {
 
   //VISTA DE LOS MAPAS OFFLINE Y ONLINE
   ionViewDidEnter() {
+    if(!this.ciudad_recibida)
+      this.ciudad_recibida = this.navParams.get("ciudad");
+    if(!this.valor)
+      this.valor = this.navParams.get("valor");
+    if(!this.coordenadas_recibidas)
+      this.coordenadas_recibidas = this.navParams.get("coordenadas");
+    if(!this.ciudad_recibida)
+      this.id_ciudad_recibida = this.navParams.get("id_ciudad");
 
     let loading = this.loadingCtrl.create({
       spinner: 'bubbles',
-      content: this.mensajes.ubicacion
+      content: this.mensajes.ubicacion,
+      duration: 6000
     });
     loading.present();
     setTimeout(() => {
@@ -420,7 +445,8 @@ export class OfflinemapsPage {
   mapa() {
     let loading = this.loadingCtrl.create({
       spinner: 'bubbles',
-      content: this.mensajes.mapa_offline
+      content: this.mensajes.mapa_offline,
+      duration: 6000
     });
     loading.present();
 

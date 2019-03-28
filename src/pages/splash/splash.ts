@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import {Proveedor1Provider} from '../../providers/proveedor1/proveedor1'; 
 import { Storage } from "@ionic/storage";
 import { Geofence } from '@ionic-native/geofence';
@@ -17,6 +17,7 @@ export class SplashPage {
     public proveedor: Proveedor1Provider,
     private st: Storage,
     private geofence: Geofence,
+    public events: Events
   ) {
 
     this.proveedor.checkLogin();
@@ -30,7 +31,7 @@ export class SplashPage {
           // console.log(':::::::::::::::::::::::LS ----------->', notificacion);
           if(notificacion){
             //this.navCtrl.setRoot('ConfiguracionPage')
-            this.navCtrl.setRoot('TabsPage', { ciudad: notificacion.ciudad?notificacion.ciudad.toLowerCase():'Quito', valor: false, coordenadas: [ parseFloat(notificacion.ciudad_lat), parseFloat(notificacion.ciudad_log) ], id_ciudad: notificacion.id_ciudad,  tabIndex: 1, store_id: notificacion.establecimientos_id });
+            this.navCtrl.setRoot('TabsPage', { ciudad: notificacion.ciudad?notificacion.ciudad.toLowerCase():'Quito', valor: false, coordenadas: [ parseFloat(notificacion.ciudad_lat), parseFloat(notificacion.ciudad_log) ], id_ciudad: notificacion.id_ciudad,  tabIndex: 1, store_id: notificacion.store_id });
           }else{
             this.navCtrl.setRoot('ConfiguracionPage');
           }
@@ -46,7 +47,16 @@ export class SplashPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SplashPage');
+    this.events.subscribe('loadPromo', () => {
+      this.st.get('ls_notification_promo').then(notificacion => {
+        if(notificacion){
+          this.navCtrl.setRoot('TabsPage', { ciudad: notificacion.ciudad?notificacion.ciudad.toLowerCase():'Quito', valor: false, coordenadas: [ parseFloat(notificacion.ciudad_lat), parseFloat(notificacion.ciudad_log) ], id_ciudad: notificacion.id_ciudad,  tabIndex: 1, store_id: notificacion.store_id });
+        }else{
+          this.navCtrl.setRoot('ConfiguracionPage');
+        }
+        
+      });
+    });
   }
 
 }
