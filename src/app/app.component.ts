@@ -56,23 +56,24 @@ export class MyApp {
         () => {
           // this.presentToast('Geofence Plugin Ready');
           console.log('Geofence Plugin Ready');
+
+        this.geofence.onNotificationClicked()
+        .subscribe(
+        (resp) => {
+          // this.presentToast(JSON.stringify(resp));
+          this.st.set('ls_notification_promo',resp);
+          if (this.rootPage){
+            this.events.publish('loadPromo');
+          }
+        },
+        (err) => {
+          console.error('ERROR NOTIFICACION',err);
+          this.st.set('ls_notification_promo',undefined);
+        });
         },
         (err) => console.log(err)
       )
 
-      this.geofence.onNotificationClicked()
-      .subscribe(
-      (resp) => {
-        // this.presentToast(JSON.stringify(resp));
-        this.st.set('ls_notification_promo',resp);
-        if (this.rootPage){
-          this.events.publish('loadPromo');
-        }
-      },
-      (err) => {
-        console.error('ERROR NOTIFICACION',err);
-        this.st.set('ls_notification_promo',undefined);
-      });
 
 
     });

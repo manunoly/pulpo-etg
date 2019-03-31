@@ -39,7 +39,7 @@ export class OfflinemapsPage {
   mi_marcador : any;
   mensajes: any = [];
   fence: any = [];
-  distancia:number = 40;
+  distancia:number = 300;
   showPromo = false;
   msg;
   constructor(public navCtrl: NavController,
@@ -66,15 +66,19 @@ export class OfflinemapsPage {
         console.log("ESTA ES LA DISTANCIA PTOS",this.distancia);
       }
 
+    }).catch(_=>{
+      this.distancia = 300;
+      console.log("error teniendo la distacia, utilizo por defecto 300");
     });
 
     let mensajes;
     translate.get('offlinemaps').subscribe(
       value => {
         mensajes = value;
+        this.mensajes = mensajes;
+
       }
     )
-    this.mensajes = mensajes;
 
     platform.registerBackButtonAction(() => {
       console.log("Retroceso negado");
@@ -122,17 +126,22 @@ export class OfflinemapsPage {
       }
 
 
-    });
+    }).catch();
 
 
 
     this.geofence.initialize().then(
       () =>{
-        console.log('Geofence Plugin Ready')
+        // this.presentToast('Geofence Plugin Ready too add');
         this.addGeofence();
       },
       (err) => console.log(err)
-    )
+    ).catch(_=>{
+      // this.presentToast('ERRRRooooor Geofence Plugin Ready too add');
+
+    })
+    // this.addGeofence();
+
   }
 
   presentToast(msg) {
@@ -144,12 +153,13 @@ export class OfflinemapsPage {
   }
 
 
-  private addGeofence() {
+  addGeofence() {
     this.fence = [];
     //options describing geofence -0.181107, -78.480331
+    // this.presentToast('addGeofence for');
 
     this.st.get('ls_promociones').then((resultado) => {
-      console.log('PROMOCIONES GEOREFERENCIA : ', resultado);
+      // this.presentToast('Tengo PROMOCIONES :' + resultado.length);
 
       for (let i = 0; i < resultado.length; i++) {
 
@@ -173,11 +183,11 @@ export class OfflinemapsPage {
         // console.log(data.notification.data);
       }
 
-      // console.log( this.fence );
+      // console.log('meto al fence',this.fence );
 
       this.geofence.addOrUpdate(this.fence).then(
         respuesta => {
-          // this.presentToast(this.fence.length + 'added' + respuesta);
+          // this.presentToast(this.fence.length + ' added ');
           // this.geofence.onTransitionReceived().subscribe((notificacion) => {
           //   this.presentToast(notificacion?JSON.stringify(notificacion):'onTransitionReceived');
           // });
@@ -204,14 +214,14 @@ export class OfflinemapsPage {
 
   //VISTA DE LOS MAPAS OFFLINE Y ONLINE
   ionViewDidEnter() {
-    if(!this.ciudad_recibida)
-      this.ciudad_recibida = this.navParams.get("ciudad");
-    if(!this.valor)
-      this.valor = this.navParams.get("valor");
-    if(!this.coordenadas_recibidas)
-      this.coordenadas_recibidas = this.navParams.get("coordenadas");
-    if(!this.ciudad_recibida)
-      this.id_ciudad_recibida = this.navParams.get("id_ciudad");
+    // if(!this.ciudad_recibida)
+    //   this.ciudad_recibida = this.navParams.get("ciudad");
+    // if(!this.valor)
+    //   this.valor = this.navParams.get("valor");
+    // if(!this.coordenadas_recibidas)
+    //   this.coordenadas_recibidas = this.navParams.get("coordenadas");
+    // if(!this.ciudad_recibida)
+    //   this.id_ciudad_recibida = this.navParams.get("id_ciudad");
 
     let loading = this.loadingCtrl.create({
       spinner: 'bubbles',
