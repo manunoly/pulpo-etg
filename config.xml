@@ -116,6 +116,7 @@
     <plugin name="cordova-plugin-geofence" spec="https://github.com/okode/cordova-plugin-geofence.git">
         <variable name="GEOFENCE_ALWAYS_USAGE_DESCRIPTION" value="${EXECUTABLE_NAME} Would Like to Use Your Current Location Even In Background." />
         <variable name="GEOFENCE_IN_USE_USAGE_DESCRIPTION" value="${EXECUTABLE_NAME} Would Like to Use Your Current Location When In Use." />
+        <variable name="GOOGLE_API_VERSION" value="11.8.0" />
     </plugin>
     <engine name="android" spec="7.1.4" />
 </widget>
