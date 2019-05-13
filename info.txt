@@ -36,7 +36,7 @@ https://github.com/katzer/cordova-plugin-background-mode/issues/264
 //version 6
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore ./platforms/android/build/outputs/apk/android-release-unsigned.apk etg
 
-
+ 
 
 
 
@@ -51,3 +51,6 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.
 Wanderbus Ecuador
 -0.20798672124301185
 -78.48400455432284
+
+codigo para compilar para ios by nmanuel
+ionic cordova build ios -- --buildFlag="-UseModernBuildSystem=0"
