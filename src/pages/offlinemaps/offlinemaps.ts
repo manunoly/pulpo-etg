@@ -144,6 +144,12 @@ export class OfflinemapsPage {
 
   }
 
+  async ionViewWillEnter(){
+    setTimeout(() => {
+      this.localizarme();
+    }, 3500);
+  }
+
   presentToast(msg) {
     const toast = this.toastCtrl.create({
       message: msg,
@@ -514,14 +520,20 @@ export class OfflinemapsPage {
   
     if(this.latitud && this.map){
       try {
-              this.map.removeLayer(this.mi_marcador);
+        this.map.removeLayer(this.mi_marcador);
       } catch (error) {}
       this.mi_marcador = L.marker([ this.latitud , this.longitud ], { icon: firefoxIcon }).addTo(this.map);
     }
 
-    this.map.panTo(new L.LatLng(this.latitud , this.longitud));
-    // this.msg="creo el marcador localizame";
-    // this.presentToast();
+    try {
+      const resp = await this.geolocation.getCurrentPosition();
+        this.latitud=resp.coords.latitude
+        this.longitud=resp.coords.longitude
+        this.map.panTo(new L.LatLng(this.latitud , this.longitud));
+
+    } catch (error) {
+      
+    }
   
     
     setTimeout(() => {
