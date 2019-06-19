@@ -135,7 +135,7 @@ export class PromotionsPage {
         this.proveedor.sincronizar(form).then((resultado) => {
           console.log('sincronizado terminado', resultado);
           loading.dismiss();
-
+          
         }, (err) => {
           console.log(err);
           loading.dismiss();
