@@ -26,7 +26,7 @@
     <preference name="FadeSplashScreen" value="false" />
     <preference name="loadUrlTimeoutValue" value="15000" />
     <preference name="UseLegacySwiftLanguageVersion" value="true" />
-    <preference name="swift-version" value="2.3" />
+    <preference name="swift-version" value="3" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
