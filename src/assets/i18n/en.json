@@ -99,6 +99,7 @@
       "exito":"Success",
       "promocion_correcta":"Promotion scanned correctly.",
       "ya_esta_escaneado":"You have already scanned this promotion.",
+      "ya_esta_escaneado_volver":"Great, scanned this promotion again.",
       "error_inesperado":"Unexpected error",
       "aceptar":"Accept",
       "sincronizando":"Synchronizing scanned promotions.."

@@ -100,6 +100,7 @@
         "exito":"Éxito",
         "promocion_correcta":"Promoción escaneada correctamente.",
         "ya_esta_escaneado":"Ya has escaneado esta promoción.",
+        "ya_esta_escaneado_volver":"Genial, vas a escanear esta promoción nuevamente.",
         "error_inesperado":"Error inesperado",
         "aceptar":"Aceptar",
         "sincronizando":"Sincronizando promociones escaneadas.."
