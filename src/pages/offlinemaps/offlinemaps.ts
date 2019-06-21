@@ -1,5 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, AlertController,LoadingController,ModalController,Events,normalizeURL } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, AlertController, LoadingController, ModalController, Events, normalizeURL } from 'ionic-angular';
 import * as L from 'leaflet'; //MAPAS OFFLINE CON LEAFLET
 import { Storage } from '@ionic/storage';
 import { File } from '@ionic-native/file';
@@ -19,27 +19,27 @@ import { ToastController } from 'ionic-angular';
 export class OfflinemapsPage {
   storageDirectory: string = '';
   map: any;
-  map1:any;
+  map1: any;
   nombre: string;
   ciudad_recibida: string;
   markers: any = [];
   markers_base: any = [];
-  l_markers:any = [];
+  l_markers: any = [];
   valor: boolean;
   coordenadas_recibidas: any;
   categorias: any = [];
   id_categoria: any;
-  id_ciudad_recibida:any;
-  isDevice:boolean = false;
+  id_ciudad_recibida: any;
+  isDevice: boolean = false;
 
-  latitud:any;
-  longitud:any;
+  latitud: any;
+  longitud: any;
   internet: boolean = false;
-  first_load:number = 0;
-  mi_marcador : any;
+  first_load: number = 0;
+  mi_marcador: any;
   mensajes: any = [];
   fence: any = [];
-  distancia:number = 300;
+  distancia: number = 300;
   showPromo = false;
   msg;
   constructor(public navCtrl: NavController,
@@ -61,12 +61,12 @@ export class OfflinemapsPage {
 
     this.st.get('ls_notificacion').then((resultado) => {
 
-      if(resultado){
+      if (resultado) {
         this.distancia = resultado.distancia;
-        console.log("ESTA ES LA DISTANCIA PTOS",this.distancia);
+        console.log("ESTA ES LA DISTANCIA PTOS", this.distancia);
       }
 
-    }).catch(_=>{
+    }).catch(_ => {
       this.distancia = 300;
       console.log("error teniendo la distacia, utilizo por defecto 300");
     });
@@ -107,7 +107,7 @@ export class OfflinemapsPage {
 
 
       console.log(this.network.type);
-      if ( this.network.type !== 'none' && this.network.type !== 'unknown' ) {
+      if (this.network.type !== 'none' && this.network.type !== 'unknown') {
         console.log('Estas conectado a internet')
         this.internet = true;
       }
@@ -117,7 +117,7 @@ export class OfflinemapsPage {
       }
 
       if (this.platform.is('ios')) {
-        this.storageDirectory =  normalizeURL(cordova.file.documentsDirectory);
+        this.storageDirectory = normalizeURL(cordova.file.documentsDirectory);
         this.isDevice = true;
 
       } else if (this.platform.is('android')) {
@@ -131,12 +131,12 @@ export class OfflinemapsPage {
 
 
     this.geofence.initialize().then(
-      () =>{
+      () => {
         // this.presentToast('Geofence Plugin Ready too add');
         this.addGeofence();
       },
       (err) => console.log(err)
-    ).catch(_=>{
+    ).catch(_ => {
       // this.presentToast('ERRRRooooor Geofence Plugin Ready too add');
 
     })
@@ -144,11 +144,11 @@ export class OfflinemapsPage {
 
   }
 
-  async ionViewWillEnter(){
-    setTimeout(() => {
-      this.localizarme();
-    }, 3500);
-  }
+  // async ionViewWillEnter() {
+  //   setTimeout(() => {
+  //     this.localizarme();
+  //   }, 3500);
+  // }
 
   presentToast(msg) {
     const toast = this.toastCtrl.create({
@@ -180,11 +180,11 @@ export class OfflinemapsPage {
             id: resultado[i]['id'], //any unique ID
             title: resultado[i]['establecimiento'], //notification title
             text: resultado[i]['titulo'], //notification body
-            icon: this.storageDirectory+resultado[i]['logo'],
+            icon: this.storageDirectory + resultado[i]['logo'],
             openAppOnClick: true, //open app when notification is tapped
-            data: {store_id:resultado[i].establecimientos_id, ciudad: resultado[i].ciudad?resultado[i].ciudad:'Quito', id_ciudad:resultado[i].id_ciudad?resultado[i].id_ciudad:5, valor: false, ciudad_lat:parseFloat(resultado[i]['latitud']),ciudad_log:parseFloat(resultado[i]['longitud'])}
+            data: { store_id: resultado[i].establecimientos_id, ciudad: resultado[i].ciudad ? resultado[i].ciudad : 'Quito', id_ciudad: resultado[i].id_ciudad ? resultado[i].id_ciudad : 5, valor: false, ciudad_lat: parseFloat(resultado[i]['latitud']), ciudad_log: parseFloat(resultado[i]['longitud']) }
           }
-        } 
+        }
         this.fence.push(data);
         // console.log(data.notification.data);
       }
@@ -208,14 +208,14 @@ export class OfflinemapsPage {
           //   // this.presentToast('ERROR NOTIFICACION'+JSON.stringify(err));
           //   this.st.set('ls_notification_promo',undefined);
           // });
-        
+
         },
         (err) => console.log('Geofence failed to add', err)
       );
 
 
     });
-  
+
   }
 
   //VISTA DE LOS MAPAS OFFLINE Y ONLINE
@@ -243,26 +243,26 @@ export class OfflinemapsPage {
         this.showpromoF();
       }, 2000);
     }, 2000);
-    let watch = this.geolocation.watchPosition(); 
+    let watch = this.geolocation.watchPosition();
     watch.subscribe((data) => {
       // let options = {
       //   timeout: 50000,
       //   enableHighAccuracy : false,
       // };
-      
+
       // this.geolocation.getCurrentPosition(options).then((data) => {  
 
       this.latitud = data.coords.latitude;
       this.longitud = data.coords.longitude;
       let update = true;
-      if(this.mi_marcador){
+      if (this.mi_marcador) {
         // this.msg="actualizo el marcador watch";
         // this.presentToast();
         // var newLatLng = new L.LatLng(data.coords.latitude , data.coords.longitude);
-        this.mi_marcador.setLatLng([data.coords.latitude , data.coords.longitude]);
+        this.mi_marcador.setLatLng([data.coords.latitude, data.coords.longitude]);
         update = false;
         return;
-        
+
       }
 
       var firefoxIcon = L.icon({
@@ -270,20 +270,20 @@ export class OfflinemapsPage {
         iconSize: [33, 50], // size of the icon
       });
 
-      if(data.coords && this.map && update){
+      if (data.coords && this.map && update) {
         try {
           this.map.removeLayer(this.mi_marcador);
         } catch (error) {
-          
+
         }
-        this.mi_marcador = L.marker([ data.coords.latitude , data.coords.longitude ], { icon: firefoxIcon }).addTo(this.map);
+        this.mi_marcador = L.marker([data.coords.latitude, data.coords.longitude], { icon: firefoxIcon }).addTo(this.map);
       }
 
     });
-    
+
   }
 
-  showpromoF(){
+  showpromoF() {
     this.showPromo = true;
     setTimeout(() => {
       this.showPromo = false;
@@ -292,7 +292,7 @@ export class OfflinemapsPage {
 
 
 
-  obtenerUbicacion(){
+  obtenerUbicacion() {
 
     /*
     let options = {
@@ -311,11 +311,11 @@ export class OfflinemapsPage {
 
 
 
-  
-  ionViewDidLeave(){
-    
+
+  ionViewDidLeave() {
+
     let self = this;
-    this.l_markers.forEach(function (layer) { 
+    this.l_markers.forEach(function (layer) {
       self.map.removeLayer(layer);
     });
     this.map.remove();
@@ -342,7 +342,7 @@ export class OfflinemapsPage {
     }
 
   }
-  
+
 
   //Carga
 
@@ -351,7 +351,7 @@ export class OfflinemapsPage {
     this.st.get('ls_establecimientos').then(resultado => {
 
       //console.log('TODOS ESTABLECIMIENTOS',resultado);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-      
+
       for (let i = 0; i < resultado.length; i++) {
         if (resultado[i]['ciudad_id'] == this.id_ciudad_recibida && resultado[i]['promocion'] == 0) {
           this.markers.push(resultado[i]);
@@ -371,13 +371,13 @@ export class OfflinemapsPage {
 
 
   //BUSCADOR DE MAPAS
-  getItems(ev: any) {    
+  getItems(ev: any) {
     this.markers = this.markers_base; //Carga de datos
 
     let val = ev;
     if (val && val.trim() != '') {
       this.markers = this.markers.filter((item) => {  //Los dos valores se toman de la consulta a la api (nombre del array)
-      return (item.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1); //Para obtener el nombre del establecimiento
+        return (item.nombre.toLowerCase().indexOf(val.toLowerCase()) > -1); //Para obtener el nombre del establecimiento
       })
     }
 
@@ -386,30 +386,30 @@ export class OfflinemapsPage {
   }
 
 
-  actualizar_mapa(){
+  actualizar_mapa() {
     let self = this;
-    this.l_markers.forEach(function (layer) { 
+    this.l_markers.forEach(function (layer) {
       self.map.removeLayer(layer);
     });
 
-    if(this.mi_marcador){
+    if (this.mi_marcador) {
       self.map.removeLayer(this.mi_marcador);
       // this.msg = "voy a borrar el marcador en actualizar_map";
       // this.presentToast();
     }
-    
+
     this.carga_marcadores();
   }
 
 
   //MODAL DESCRIPCION CADA ESTABLECIMIENTO
   presentDescriptionModal(marker) {
-    let descriptionModal = this.modalCtrl.create('DescriptionPage', { nombre: marker.nombre, descripcion: marker.descripcion, imagen: marker.logo, audio: marker.audio, ciudad:this.ciudad_recibida, latitud:marker.latitud, longitud:marker.longitud, direccion:marker.direccion, id_ciudad:this.id_ciudad_recibida, galerias: marker.galeria, email:marker.email, telefono:marker.telefono, web:marker.web, categorias_id:marker.categorias_id});
+    let descriptionModal = this.modalCtrl.create('DescriptionPage', { nombre: marker.nombre, descripcion: marker.descripcion, imagen: marker.logo, audio: marker.audio, ciudad: this.ciudad_recibida, latitud: marker.latitud, longitud: marker.longitud, direccion: marker.direccion, id_ciudad: this.id_ciudad_recibida, galerias: marker.galeria, email: marker.email, telefono: marker.telefono, web: marker.web, categorias_id: marker.categorias_id });
     descriptionModal.present();
     //console.log('jdfksf--_>',marker.audio, marker.latitud, marker.longitud);
   }
 
-  
+
 
   //CATEGORIAS DE EJEMPLO 
   carga_categorias() {
@@ -429,7 +429,7 @@ export class OfflinemapsPage {
           //console.log('Icono   ',this.icono);
         }
       }
-      this.categorias=this.categorias;
+      this.categorias = this.categorias;
     });
   }
 
@@ -441,17 +441,17 @@ export class OfflinemapsPage {
     this.markers = [];
     console.log('La categoria que se selecciona es ', this.id_categoria);
 
-        for (let i = 0; i < this.markers_base.length; i++) {
-          //console.log('todo',resultado[i]);
-          if (this.markers_base[i]['categorias_id'] == this.id_categoria) {
-            this.markers.push(this.markers_base[i]);
-            //console.log('Categorias a mostrarse push ',this.markers_base[i]);
-            //this.listado_establecimientos(); //Ejemplo con datos quemados
-          }
-        }
+    for (let i = 0; i < this.markers_base.length; i++) {
+      //console.log('todo',resultado[i]);
+      if (this.markers_base[i]['categorias_id'] == this.id_categoria) {
+        this.markers.push(this.markers_base[i]);
+        //console.log('Categorias a mostrarse push ',this.markers_base[i]);
+        //this.listado_establecimientos(); //Ejemplo con datos quemados
+      }
+    }
 
     this.actualizar_mapa();
-    
+
   }
 
 
@@ -467,135 +467,146 @@ export class OfflinemapsPage {
     loading.present();
 
     this.map = L.map('map').
-      setView(this.coordenadas_recibidas,
-        13);
+      setView(this.mi_marcador && this.mi_marcador._latlng ? this.mi_marcador._latlng : this.coordenadas_recibidas,
+        16);
 
     loading.dismiss();
 
-    console.log('Aqui se guarda',this.storageDirectory+this.ciudad_recibida+this.ciudad_recibida);
+    console.log('Aqui se guarda', this.storageDirectory + this.ciudad_recibida + this.ciudad_recibida);
 
-    if(!this.isDevice){
+    if (!this.isDevice) {
       this.map1 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, minZoom: 13 }).addTo(this.map);
-    }else{
-      if(!this.internet){
-        this.map1 = L.tileLayer( this.storageDirectory + this.ciudad_recibida + '/' + this.ciudad_recibida + '/{z}/{x}/{y}.png' , { maxZoom: 18, minZoom: 13 }).addTo(this.map);
-      }else{
+    } else {
+      if (!this.internet) {
+        this.map1 = L.tileLayer(this.storageDirectory + this.ciudad_recibida + '/' + this.ciudad_recibida + '/{z}/{x}/{y}.png', { maxZoom: 18, minZoom: 13 }).addTo(this.map);
+      } else {
         this.map1 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, minZoom: 13 }).addTo(this.map);
       }
-      
+
     }
     this.carga_marcadores();
   }
 
 
-  async localizarme(){
-    
-    if(this.mi_marcador){
+  async localizarme() {
+    if (this.mi_marcador && this.mi_marcador._latlng) {
       let options = {
-        enableHighAccuracy : false
+        timeout: 30000,
+        enableHighAccuracy: false,
       };
-      this.geolocation.getCurrentPosition(options).then((resp) => {
-        this.latitud=resp.coords.latitude
-        this.longitud=resp.coords.longitude
-         try { 
-        // this.map.removeLayer(this.mi_marcador);
-        // var newLatLng = new L.LatLng(this.latitud, this.longitud);
-        this.mi_marcador.setLatLng([this.latitud, this.longitud]);
-        this.mi_marcador.closePopup(); 
-        this.map.panTo(new L.LatLng(this.latitud , this.longitud));
-        // this.msg="actualizo el marcador localizame";
-        // this.presentToast();
-
-        return
-      } catch (error) {
-        return
+      if (this.mi_marcador && this.mi_marcador._latlng) {
+        this.map.panTo(this.mi_marcador._latlng);
+        this.map.setView(this.mi_marcador._latlng);
+        this.map.setZoom(16);
       }
-      }).catch();
+
+      this.geolocation.getCurrentPosition(options).then((resp) => {
+        console.log('mi marcador es el creado', this.mi_marcador, 'coordenadas ', resp);
+
+        this.latitud = resp.coords.latitude
+        this.longitud = resp.coords.longitude
+        try {
+          // this.map.removeLayer(this.mi_marcador);
+          // var newLatLng = new L.LatLng(this.latitud, this.longitud);
+          this.mi_marcador.setLatLng([this.latitud, this.longitud]);
+          this.mi_marcador.closePopup();
+          this.map.panTo(this.mi_marcador._latlng);
+          this.map.setView(this.mi_marcador._latlng);
+          this.map.setZoom(16);
+          return;
+        } catch (error) {
+          console.log('error cuando existe el marcador', error);
+
+          return;
+        }
+      }).catch(error => {
+        console.log('error cuando de la geolocation existe el marcador', error);
+        return;
+      });
+    } else {
+      var firefoxIcon = L.icon({
+        iconUrl: 'assets/icon/ubicacion.png',
+        iconSize: [33, 50], // size of the icon
+      });
+
+      if (this.latitud && this.map) {
+        try {
+          console.log('elimino mi marcador de mapa a esta', this.latitud, 'este es ', this.mi_marcador);
+          this.map.removeLayer(this.mi_marcador);
+        } catch (error) { }
+        this.mi_marcador = L.marker([this.latitud, this.longitud], { icon: firefoxIcon }).addTo(this.map);
+      }
+
+      this.map.panTo(this.mi_marcador._latlng);
+      this.map.setView(this.mi_marcador._latlng);
+      this.map.setZoom(16);
+
+      setTimeout(() => {
+        this.mi_marcador.closePopup();
+      }, 2000);
     }
-
-    var firefoxIcon = L.icon({
-      iconUrl: 'assets/icon/ubicacion.png',
-      iconSize: [33, 50], // size of the icon
-    });
-  
-    if(this.latitud && this.map){
-      try {
-        this.map.removeLayer(this.mi_marcador);
-      } catch (error) {}
-      this.mi_marcador = L.marker([ this.latitud , this.longitud ], { icon: firefoxIcon }).addTo(this.map);
-    }
-
-    try {
-      const resp = await this.geolocation.getCurrentPosition();
-        this.latitud=resp.coords.latitude
-        this.longitud=resp.coords.longitude
-        this.map.panTo(new L.LatLng(this.latitud , this.longitud));
-
-    } catch (error) {
-      
-    }
-  
-    
-    setTimeout(() => {
-       this.mi_marcador.closePopup(); 
-    }, 2000);
-
   }
 
 
-  
-  carga_marcadores(){
+
+  carga_marcadores() {
     let self = this;
 
     this.map.locate({
-        setView: this.valor ,  //Activa o desactiva geolocalización
-        timeout: 1000*60,
-        enableHighAccuracy: true, 
-        maximumAge: 1000*60*60
+      setView: this.mi_marcador && this.mi_marcador._latlng ? this.mi_marcador._latlng : this.valor,  //Activa o desactiva geolocalización
+      timeout: 1000 * 60,
+      enableHighAccuracy: true,
+      maximumAge: 1000 * 60 * 60
     })
-    .on('locationfound', (e) => {
+      .on('locationfound', (e) => {
 
-      console.log("LEAFLET MI UBICACIÓN ------> ", e);
+        console.log("LEAFLET MI UBICACIÓN ------> ", e);
 
-      var firefoxIcon = L.icon({
-        iconUrl: 'assets/icon/ubicacion.png',
-        iconSize: [33, 50], // size of the icon
+        var firefoxIcon = L.icon({
+          iconUrl: 'assets/icon/ubicacion.png',
+          iconSize: [33, 50], // size of the icon
+        });
+
+        if (this.mi_marcador) {
+          this.map.removeLayer(this.mi_marcador);
+          // this.msg = "borro el marcador cuando voy a cargar los marcadores";
+          // this.presentToast();
+        }
+
+        self.mi_marcador = L.marker(e.latlng, { icon: firefoxIcon }).addTo(this.map)
+          .bindPopup(this.mensajes.tu_te_encuentras_aqui).openPopup();
+        //L.circle(e.latlng).addTo(this.map);
+        setTimeout(() => {
+          console.log('close popup and center');
+          self.mi_marcador.closePopup();
+          if (this.mi_marcador && this.mi_marcador._latlng && this.map) {
+            this.map.panTo(this.mi_marcador._latlng);
+            this.map.setView(this.mi_marcador._latlng);
+            this.map.setZoom(16);
+          }
+        }, 2000);
+
+      }).on('locationerror', (err) => {
+        console.log('ERROR MAPA', err);
+
+        var firefoxIcon = L.icon({
+          iconUrl: 'assets/icon/ubicacion.png',
+          iconSize: [33, 50], // size of the icon
+        });
+
+        /*
+        let options = {
+          enableHighAccuracy : false
+        };
+        this.geolocation.getCurrentPosition(options).then((resp) => {
+          this.latitud=resp.coords.latitude
+          this.longitud=resp.coords.longitude
+          console.log("Error en latitud y longitud", this.latitud,this.longitud);
+          self.mi_marcador = L.marker([this.latitud,this.longitud], { icon: firefoxIcon }).addTo(this.map)
+          .bindPopup("Tu te encuentras aquí").openPopup();
+        });
+        */
       });
-
-      if(this.mi_marcador){
-        this.map.removeLayer(this.mi_marcador);
-        // this.msg = "borro el marcador cuando voy a cargar los marcadores";
-        // this.presentToast();
-      }
-      
-      self.mi_marcador = L.marker(e.latlng, { icon: firefoxIcon }).addTo(this.map)
-      .bindPopup(this.mensajes.tu_te_encuentras_aqui).openPopup();
-      //L.circle(e.latlng).addTo(this.map);
-      setTimeout(() => {
-        self.mi_marcador.closePopup(); 
-      }, 2000);
-
-    }).on('locationerror', (err) => {
-      console.log('ERROR MAPA', err);
-      
-      var firefoxIcon = L.icon({
-        iconUrl: 'assets/icon/ubicacion.png',
-        iconSize: [33, 50], // size of the icon
-      });
-
-      /*
-      let options = {
-        enableHighAccuracy : false
-      };
-      this.geolocation.getCurrentPosition(options).then((resp) => {
-        this.latitud=resp.coords.latitude
-        this.longitud=resp.coords.longitude
-        console.log("Error en latitud y longitud", this.latitud,this.longitud);
-        self.mi_marcador = L.marker([this.latitud,this.longitud], { icon: firefoxIcon }).addTo(this.map)
-        .bindPopup("Tu te encuentras aquí").openPopup();
-      });
-      */
-    });
 
     this.marcadores();
 
@@ -606,45 +617,44 @@ export class OfflinemapsPage {
     for (var i = 0; i < this.markers.length; ++i) {
 
       if (this.markers[i].categorias_id == 1) {
-        this.setear_marcador(i,'assets/icon/icon_edif.png');
+        this.setear_marcador(i, 'assets/icon/icon_edif.png');
       } else if (this.markers[i].categorias_id == 3) {
-        this.setear_marcador(i,'assets/icon/icon_igle.png'); 
+        this.setear_marcador(i, 'assets/icon/icon_igle.png');
       } else if (this.markers[i].categorias_id == 4) {
-        this.setear_marcador(i,'assets/icon/icon_mus.png');  
-      } else  if (this.markers[i].categorias_id == 2) {
-        this.setear_marcador(i,'assets/icon/icon_plaz.png');  
+        this.setear_marcador(i, 'assets/icon/icon_mus.png');
+      } else if (this.markers[i].categorias_id == 2) {
+        this.setear_marcador(i, 'assets/icon/icon_plaz.png');
       }
 
     }
   }
 
 
-  setear_marcador(i,icono){
+  setear_marcador(i, icono) {
     var firefoxIcon = L.icon({
       iconUrl: icono,
       iconSize: [33, 50], // size of the icon
     });
-    let marker =  L.marker([this.markers[i].latitud, this.markers[i].longitud], { icon: firefoxIcon })
-    .bindPopup('<b>Lugar: </b>' + this.markers[i].nombre + '</br>' + '<b>Dirección: </b>' + this.markers[i].direccion +' </br></br> <center> <a class="link-establecimiento'+this.markers[i]['id']+'" data-establecimiento="'+ this.markers[i]['id'] +'"> Ver más </a> </center> ' )
-    .addTo(this.map);
+    let marker = L.marker([this.markers[i].latitud, this.markers[i].longitud], { icon: firefoxIcon })
+      .bindPopup('<b>Lugar: </b>' + this.markers[i].nombre + '</br>' + '<b>Dirección: </b>' + this.markers[i].direccion + ' </br></br> <center> <a class="link-establecimiento' + this.markers[i]['id'] + '" data-establecimiento="' + this.markers[i]['id'] + '"> Ver más </a> </center> ')
+      .addTo(this.map);
 
     let self = this;
     let id = this.markers[i]['id'];
 
-    marker.on('popupopen', function() {
+    marker.on('popupopen', function () {
       // add event listener to newly added a.merch-link element
-      self.elementRef.nativeElement.querySelector(".link-establecimiento"+id)
-      .addEventListener('click', (e)=>
-      {
-        // get id from attribute
-        var id_establecimiento = e.target.getAttribute("data-establecimiento");
-        self.seleccionar_establecimiento(id_establecimiento);
+      self.elementRef.nativeElement.querySelector(".link-establecimiento" + id)
+        .addEventListener('click', (e) => {
+          // get id from attribute
+          var id_establecimiento = e.target.getAttribute("data-establecimiento");
+          self.seleccionar_establecimiento(id_establecimiento);
 
-      });
+        });
     });
 
 
-    this.l_markers.push( marker );
+    this.l_markers.push(marker);
 
 
   }
@@ -652,7 +662,7 @@ export class OfflinemapsPage {
 
   seleccionar_establecimiento(id) {
     for (let i = 0; i < this.markers.length; i++) {
-      if (this.markers[i]['id'] == id ) {
+      if (this.markers[i]['id'] == id) {
         this.presentDescriptionModal(this.markers[i]);
       }
     }
