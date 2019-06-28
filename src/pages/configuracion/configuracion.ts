@@ -511,7 +511,7 @@ export class ConfiguracionPage {
     let i;
     for(i = 0; i < this.archivos_descarga.length ; i++){
 
-      if(!this.archivos_descarga[i]['city']){
+      if(!this.archivos_descarga[i]['city']){ 
 
         await this.descargador( this.archivos_descarga[i]['link'] ).then((resultado) => {
 
@@ -572,6 +572,8 @@ export class ConfiguracionPage {
 
     return new Promise((resolve, errores) => {
 
+      if(url.includes('mp3'))
+        resolve(true);
       let path = this.storageDirectory + url;
       let nombre = this.obtener_nombre_archivo(path);
       path = path.replace( nombre,'');
