@@ -432,7 +432,7 @@ export class ConfiguracionPage {
        * IR AL MAPA CUANDO NO HAY DESCARGAS;
        */
       console.log("HAY DESCARGAS :", this.archivos_descarga);
-      this.ir_mapa();
+      this.ir_mapa(); 
       return;
     }
 
@@ -1096,22 +1096,23 @@ obtener_mapas() {
 
     console.log('Parametros que se envian: ' , this.ciudad_offline ,this.coordenadas, this.id_ciudad);
     
-    if(!this.isDevice) { 
+    // if(!this.isDevice) { 
       this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: true, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad });
-      return;
-    }
+      // return;
+    // }
 
-    this.file.checkDir(this.storageDirectory, this.ciudad_offline)
-    .then(() => {
-      if (this.ciudad_offline) {
-        this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: true, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad });
-      } else {
-        this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: false, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad  });
-      }
-    }, (err) => {
+    // this.file.checkDir(this.storageDirectory, this.ciudad_offline)
+    // .then(() => { 
+    //   if (this.ciudad_offline) {
+    //     this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: true, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad });
+    //   } else {
+    //     this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: true, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad });
+    //   // esto estaba para no navegar this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: false, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad  });
+    //   }
+    // }, (err) => {
       
       
-    });
+    // });
 
 
   }
