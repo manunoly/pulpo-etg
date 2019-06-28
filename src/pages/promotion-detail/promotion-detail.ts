@@ -141,7 +141,7 @@ export class PromotionDetailPage {
 
 
 
-  validar_enlinea( codigo){
+  validar_enlinea( codigo ){
     this.platform.ready().then(() => {
       console.log(this.network.type);
       if ( this.network.type !== 'none' && this.network.type !== 'unknown' ) {
@@ -204,9 +204,11 @@ export class PromotionDetailPage {
             console.log('VALIDACION',pe[s]['promocion_id'] , this.promocion.id  );
             if(pe[s]['promocion_id'] ==  this.promocion.id ){
               if(mensajes){
-                this.alert(this.mensajes.lo_sentimos,this.mensajes.ya_esta_escaneado);
+                mensajes = false;
+                this.alert(this.mensajes.aceptar,this.mensajes.ya_esta_escaneado_volver);
               }
-              return;
+              //comento el return para dejar escanear mas de 1 vez
+              // return;
             }
 
           }

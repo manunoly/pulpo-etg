@@ -171,9 +171,9 @@ export class ConfiguracionPage {
       this.getPosition();
 
       let loading = this.loadingCtrl.create({
-        content: this.mensajes.actualizacion,
+        content: this.mensajes.actualizacion?this.mensajes.actualizacion:'',
       });
-
+ 
       loading.present();
 
       this.proveedor.actualizaciones().then((resultado) => {
@@ -399,31 +399,31 @@ export class ConfiguracionPage {
   ciudadDescarga(){
 
     //SI NO SE ESTA USANDO DISPOSITIVO MOVIL
-    if(!this.isDevice) {
-      this.ir_mapa();
-      return;
-    }
+    // if(!this.isDevice) {
+    //   this.ir_mapa();
+    //   return;
+    // }
 
 
 
     //VERIFICANDO SI SE SELECCIONA LA CIUDAD
-    if (this.ciudad_offline === undefined) {
-      let alert = this.alertCtrl.create({
-        title: this.mensajes.titulo_atencion,
-        message: this.mensajes.ubicacion_disponible,
-        buttons: [
-          {
-            text: this.mensajes.continuar,
-            role: this.mensajes.cancelar,
-            handler: () => {
+    // if (this.ciudad_offline === undefined) {
+    //   let alert = this.alertCtrl.create({
+    //     title: this.mensajes.titulo_atencion,
+    //     message: this.mensajes.ubicacion_disponible,
+    //     buttons: [
+    //       {
+    //         text: this.mensajes.continuar,
+    //         role: this.mensajes.cancelar,
+    //         handler: () => {
 
-            }
-          }
-        ]
-      });
-      alert.present();
-      return;
-    }
+    //         }
+    //       }
+    //     ]
+    //   });
+    //   alert.present();
+    //   return;
+    // }
 
     
     //VERIFICANDO SI YA SE DESCARGO LOS ARCHIVOS
@@ -468,15 +468,16 @@ export class ConfiguracionPage {
         message: this.mensajes.sin_mapa_descarga,
         buttons: [
           {
-            text: this.mensajes.cancelar,
+            text: this.mensajes.continuarDescarga,
             handler: () => {
               console.log('Disagree clicked');
+              this.btndescarga(this.all_mapa_seleccionado);
             }
           },
           {
-            text: this.mensajes.aceptar,
+            text: this.mensajes.continuarSinDescarga,
             handler: () => {
-              this.btndescarga(this.all_mapa_seleccionado);
+              this.ir_mapa();
             }
           }
         ]
