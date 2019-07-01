@@ -66,8 +66,12 @@ export class PromotionDetailPage {
 
     this.ratingdata = this.proveedor.ScoreDefault();
 
-    this.platform.ready().then(() => {
-      
+    this.platform.ready().then(async () => {
+      let local = false;  
+      try {
+        local = await this.st.get('localData');
+      } catch (error) {}
+
       if (!this.platform.is('cordova')) {
         this.storageDirectory = ASSETS_URL+'';
         console.log('local-app',this.storageDirectory);
@@ -89,14 +93,16 @@ export class PromotionDetailPage {
 
       if (this.platform.is('ios')) {
         this.storageDirectory = normalizeURL(cordova.file.documentsDirectory);
+        if(this.internet && (local == false || local == undefined))
+          this.storageDirectory = ASSETS_URL+'';
         return;
 
       }else if (this.platform.is('android')) {
         this.storageDirectory = this.file.dataDirectory;
+        if(this.internet && (local == false || local == undefined))
+          this.storageDirectory = ASSETS_URL+'';
         return;
-
       }
-
     });
 
  

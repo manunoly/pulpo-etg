@@ -888,7 +888,7 @@ obtener_mapas() {
           if(result) {
             iconos_array[i]['icono'] = 'checkmark';
             this.suma_mapas+= parseInt( this.mapas_disponibles[i]['peso'] );
-
+            this.st.set('localData',true);
           }else{
             iconos_array[i]['icono'] = 'download';
           }
