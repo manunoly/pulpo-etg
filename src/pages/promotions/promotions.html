@@ -16,8 +16,8 @@
         </ion-row>
 
         <div class="scrollmenu" *ngIf="storageDirectory" #categoriasScroll  id="categoriasScroll" scrollY="true" >
-            <ion-col col-4 *ngFor="let categoria of categorias">
-                <img class="promociones_img" [src]="storageDirectory+categoria.icono" alt="" (click)="filtrar(categoria)" >
+            <ion-col col-4 *ngFor="let categoria of categorias" tappable (click)="filtrar(categoria)">
+                <img class="promociones_img" [src]="storageDirectory+categoria.icono" alt="">
                 <div class="texto"> {{categoria.nombre}} </div>
             </ion-col>
         </div>

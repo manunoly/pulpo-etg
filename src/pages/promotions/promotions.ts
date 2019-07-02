@@ -34,11 +34,11 @@ export class PromotionsPage {
     private network: Network,
     translate: TranslateService
   ) {
-      this.st.get('localData').then(local=>{
-      if(!local)
-        this.storageDirectory = ASSETS_URL+'';
-      console.log('utilizo el storaga', this.storageDirectory);
-  });
+  //     this.st.get('localData').then(local=>{
+  //     if(!local)
+  //       this.storageDirectory = ASSETS_URL+'';
+  //     console.log('utilizo el storaga', this.storageDirectory);
+  // });
 
     let mensajes;
     translate.get('promotion_detail').subscribe(
@@ -53,6 +53,10 @@ export class PromotionsPage {
       if (!this.platform.is('cordova')) {
         this.storageDirectory = ASSETS_URL+'';
         console.log('local-app',this.storageDirectory);
+        return;
+      }
+      if ( this.network.type !== 'none' && this.network.type !== 'unknown' ) {
+        this.storageDirectory = ASSETS_URL+'';
         return;
       }
       if (this.platform.is('ios')) {

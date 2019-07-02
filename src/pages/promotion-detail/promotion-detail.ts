@@ -89,18 +89,17 @@ export class PromotionDetailPage {
 
         }
       }
-
+      if(this.internet){
+        this.storageDirectory = ASSETS_URL+'';
+        return;
+      }
 
       if (this.platform.is('ios')) {
         this.storageDirectory = normalizeURL(cordova.file.documentsDirectory);
-        if(this.internet && (local == false || local == undefined))
-          this.storageDirectory = ASSETS_URL+'';
         return;
 
       }else if (this.platform.is('android')) {
         this.storageDirectory = this.file.dataDirectory;
-        if(this.internet && (local == false || local == undefined))
-          this.storageDirectory = ASSETS_URL+'';
         return;
       }
     });
