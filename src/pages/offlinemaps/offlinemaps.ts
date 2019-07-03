@@ -468,7 +468,7 @@ export class OfflinemapsPage {
 
     this.map = L.map('map').
       setView(this.mi_marcador && this.mi_marcador._latlng ? this.mi_marcador._latlng : this.coordenadas_recibidas,
-        16);
+        18);
 
     loading.dismiss();
 

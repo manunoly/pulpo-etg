@@ -34,6 +34,11 @@ export class PromotionsPage {
     private network: Network,
     translate: TranslateService
   ) {
+      this.st.get('localData').then(local=>{
+      if(!local)
+        this.storageDirectory = ASSETS_URL+'';
+      console.log('utilizo el storaga', this.storageDirectory);
+  });
 
     let mensajes;
     translate.get('promotion_detail').subscribe(
@@ -164,7 +169,7 @@ export class PromotionsPage {
           this.categorias.push(resultado[i]);
         }
       }
-      console.log(this.categorias);
+      console.log(this.categorias); 
     });
 
 

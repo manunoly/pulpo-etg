@@ -432,7 +432,7 @@ export class ConfiguracionPage {
        * IR AL MAPA CUANDO NO HAY DESCARGAS;
        */
       console.log("HAY DESCARGAS :", this.archivos_descarga);
-      this.ir_mapa();
+      this.ir_mapa(); 
       return;
     }
 
@@ -511,7 +511,7 @@ export class ConfiguracionPage {
     let i;
     for(i = 0; i < this.archivos_descarga.length ; i++){
 
-      if(!this.archivos_descarga[i]['city']){
+      if(!this.archivos_descarga[i]['city']){ 
 
         await this.descargador( this.archivos_descarga[i]['link'] ).then((resultado) => {
 
@@ -572,6 +572,8 @@ export class ConfiguracionPage {
 
     return new Promise((resolve, errores) => {
 
+      if(url.includes('mp3'))
+        resolve(true);
       let path = this.storageDirectory + url;
       let nombre = this.obtener_nombre_archivo(path);
       path = path.replace( nombre,'');
@@ -886,7 +888,7 @@ obtener_mapas() {
           if(result) {
             iconos_array[i]['icono'] = 'checkmark';
             this.suma_mapas+= parseInt( this.mapas_disponibles[i]['peso'] );
-
+            this.st.set('localData',true);
           }else{
             iconos_array[i]['icono'] = 'download';
           }
@@ -1096,22 +1098,23 @@ obtener_mapas() {
 
     console.log('Parametros que se envian: ' , this.ciudad_offline ,this.coordenadas, this.id_ciudad);
     
-    if(!this.isDevice) { 
+    // if(!this.isDevice) { 
       this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: true, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad });
-      return;
-    }
+      // return;
+    // }
 
-    this.file.checkDir(this.storageDirectory, this.ciudad_offline)
-    .then(() => {
-      if (this.ciudad_offline) {
-        this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: true, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad });
-      } else {
-        this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: false, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad  });
-      }
-    }, (err) => {
+    // this.file.checkDir(this.storageDirectory, this.ciudad_offline)
+    // .then(() => { 
+    //   if (this.ciudad_offline) {
+    //     this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: true, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad });
+    //   } else {
+    //     this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: true, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad });
+    //   // esto estaba para no navegar this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: false, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad  });
+    //   }
+    // }, (err) => {
       
       
-    });
+    // });
 
 
   }
