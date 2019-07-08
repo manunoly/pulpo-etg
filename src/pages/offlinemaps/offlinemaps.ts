@@ -107,24 +107,23 @@ export class OfflinemapsPage {
 
 
       console.log(this.network.type);
-      if (this.network.type !== 'none' && this.network.type !== 'unknown') {
-        console.log('Estas conectado a internet')
-        this.internet = true;
-      }
 
       if (!this.platform.is('cordova')) {
         this.internet = true;
       }
-
+      if (this.network.type !== 'none' && this.network.type !== 'unknown') {
+        console.log('Estas conectado a internet')
+        this.internet = true;
+        this.storageDirectory = ASSETS_URL + '';
+      }else {
       if (this.platform.is('ios')) {
         this.storageDirectory = normalizeURL(cordova.file.documentsDirectory);
         this.isDevice = true;
-
       } else if (this.platform.is('android')) {
         this.storageDirectory = this.file.dataDirectory;
         this.isDevice = true;
       }
-
+    }
 
     }).catch();
 
@@ -488,63 +487,54 @@ export class OfflinemapsPage {
   }
 
 
-  async localizarme() {
-    if (this.mi_marcador && this.mi_marcador._latlng) {
+  async localizarme(){
+    
+    if(this.mi_marcador !== undefined){
       let options = {
-        timeout: 30000,
-        enableHighAccuracy: false,
+        enableHighAccuracy : false
       };
-      if (this.mi_marcador && this.mi_marcador._latlng) {
+      this.geolocation.getCurrentPosition(options).then((resp) => {
+        this.latitud=resp.coords.latitude
+        this.longitud=resp.coords.longitude
+         try { 
+        // this.map.removeLayer(this.mi_marcador);
+        // var newLatLng = new L.LatLng(this.latitud, this.longitud);
+        this.mi_marcador.setLatLng([this.latitud, this.longitud]);
+        this.mi_marcador.closePopup(); 
+        this.map.panTo(new L.LatLng(this.latitud , this.longitud));
+        // this.msg="actualizo el marcador localizame";
+        // this.presentToast();
+
+        return
+      } catch (error) {
+        return
+      }
+      }).catch();
+    }
+
+    var firefoxIcon = L.icon({
+      iconUrl: 'assets/icon/ubicacion.png',
+      iconSize: [33, 50], // size of the icon
+    });
+  
+    if(this.latitud !== undefined  && this.map !== undefined){
+      try {
+        this.map.removeLayer(this.mi_marcador);
+      } catch (error) {}
+        this.mi_marcador = L.marker([ this.latitud , this.longitud ], { icon: firefoxIcon }).addTo(this.map);
         this.map.panTo(this.mi_marcador._latlng);
         this.map.setView(this.mi_marcador._latlng);
         this.map.setZoom(16);
       }
 
-      this.geolocation.getCurrentPosition(options).then((resp) => {
-        console.log('mi marcador es el creado', this.mi_marcador, 'coordenadas ', resp);
+    // this.msg="creo el marcador localizame";
+    // this.presentToast();
+  
+    
+    setTimeout(() => {
+       this.mi_marcador.closePopup(); 
+    }, 2000);
 
-        this.latitud = resp.coords.latitude
-        this.longitud = resp.coords.longitude
-        try {
-          // this.map.removeLayer(this.mi_marcador);
-          // var newLatLng = new L.LatLng(this.latitud, this.longitud);
-          this.mi_marcador.setLatLng([this.latitud, this.longitud]);
-          this.mi_marcador.closePopup();
-          this.map.panTo(this.mi_marcador._latlng);
-          this.map.setView(this.mi_marcador._latlng);
-          this.map.setZoom(16);
-          return;
-        } catch (error) {
-          console.log('error cuando existe el marcador', error);
-
-          return;
-        }
-      }).catch(error => {
-        console.log('error cuando de la geolocation existe el marcador', error);
-        return;
-      });
-    } else {
-      var firefoxIcon = L.icon({
-        iconUrl: 'assets/icon/ubicacion.png',
-        iconSize: [33, 50], // size of the icon
-      });
-
-      if (this.latitud && this.map) {
-        try {
-          console.log('elimino mi marcador de mapa a esta', this.latitud, 'este es ', this.mi_marcador);
-          this.map.removeLayer(this.mi_marcador);
-        } catch (error) { }
-        this.mi_marcador = L.marker([this.latitud, this.longitud], { icon: firefoxIcon }).addTo(this.map);
-      }
-
-      this.map.panTo(this.mi_marcador._latlng);
-      this.map.setView(this.mi_marcador._latlng);
-      this.map.setZoom(16);
-
-      setTimeout(() => {
-        this.mi_marcador.closePopup();
-      }, 2000);
-    }
   }
 
 

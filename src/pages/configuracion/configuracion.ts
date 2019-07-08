@@ -396,7 +396,7 @@ export class ConfiguracionPage {
   }
 
 
-  ciudadDescarga() {
+  ciudadDescarga() { 
 
     //SI NO SE ESTA USANDO DISPOSITIVO MOVIL
     // if(!this.isDevice) {
@@ -427,14 +427,14 @@ export class ConfiguracionPage {
 
 
     //VERIFICANDO SI YA SE DESCARGO LOS ARCHIVOS
-    if (this.archivos_descarga.length == 0) {
       /**
        * IR AL MAPA CUANDO NO HAY DESCARGAS;
-       */
-      console.log("HAY DESCARGAS :", this.archivos_descarga);
-      this.ir_mapa();
-      return;
-    }
+       */    
+    // if (this.archivos_descarga.length == 0) {
+    //   console.log("HAY DESCARGAS :", this.archivos_descarga);
+    //   this.ir_mapa();
+    //   return;
+    // }
 
 
 
@@ -442,7 +442,11 @@ export class ConfiguracionPage {
      * Verificando si se ha descargado el mapa
      */
     this.file.checkDir(this.storageDirectory, this.ciudad_offline).then(_ => {
-
+      if (this.archivos_descarga.length == 0) {
+        console.log("No HAY DESCARGAS, ir al mapa", this.archivos_descarga);
+        this.ir_mapa(); 
+        return;       
+      }
       this.loading = this.loadingCtrl.create({
         content: this.mensajes.descargando,
       });
@@ -500,9 +504,9 @@ export class ConfiguracionPage {
 
 
   async descargandoArchivos() {
+    console.log('esto tiene la descarga de los archivos, descargandoArchivos', this.archivos_descarga)
     if (this.archivos_descarga.length == 0)
       return;
-
     let loading = this.loadingCtrl.create({
       content: this.mensajes.descargando,
     });
@@ -601,11 +605,12 @@ export class ConfiguracionPage {
           //console.log(err);
           let url_server = ASSETS_URL + url;
 
+/*        este codigo saltaba los MP3 para descargarlos   
           if (url.includes('.mp3')) {
             console.log('esta url incluye el mp3, la salto', url);
             resolve(true);
             return;
-          }
+          } */
 
           this.fileTransfer.download(url_server, this.storageDirectory + url).then((entry) => {
             console.log('Descarga completa  : ' + entry.toURL());
@@ -839,7 +844,7 @@ export class ConfiguracionPage {
 
       }, (error) => {
         // handle error
-        console.log('ERROR', error);
+        console.log('ERROR descargando', error);
         loader.dismiss();
       });
     });
@@ -853,6 +858,8 @@ export class ConfiguracionPage {
     loader.present();
 
     console.log('AQUI SE GUARDA', this.storageDirectory + this.ciudad_descarga);
+    if (this.archivos_descarga.length == 0)
+      this.descargar_archivos();
 
     this.zip.unzip(this.storageDirectory + this.mapa_descarga[0]['original_name'], this.storageDirectory + this.ciudad_descarga, (progress) => console.log('Unzipping, ' + Math.round((progress.loaded / progress.total) * 100) + '%'))
       .then((result) => {
@@ -861,9 +868,10 @@ export class ConfiguracionPage {
         if (result === 0) {
           this.obtener_mapas();
           this.descargandoArchivos();
+
         }
-        if (result === -1) console.log('FALLO');
-      });
+        if (result === -1) console.log('FALLO descromprimiendo this.zip.unzip');
+      }).catch();
   }
 
 
@@ -912,7 +920,7 @@ export class ConfiguracionPage {
           } else {
             iconos_array[i]['icono'] = 'download';
           }
-        });
+        }).catch();
 
       }
 
@@ -940,7 +948,7 @@ export class ConfiguracionPage {
         }, (err) => {
           console.log('No existe archivo : ', nombre);
           resultado(false);
-        });
+        }).catch(_=>resultado(false));
     });
   }
 

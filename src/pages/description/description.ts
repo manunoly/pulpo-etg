@@ -7,6 +7,7 @@ import { LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
+import { Network } from '@ionic-native/network';
 
 @IonicPage()
 @Component({
@@ -43,6 +44,7 @@ export class DescriptionPage {
     public viewCtrl: ViewController,
     public st: Storage,
     private file: File,
+    private network: Network
   ) {
     this.galerias=navParams.get("galerias");
     this.ciudad_actual = navParams.get("ciudad");
@@ -70,17 +72,22 @@ export class DescriptionPage {
     
     this.platform.ready().then(() => {
       
-      if (!this.platform.is('cordova')) {
+      if (!this.platform.is('cordova')) { 
         this.storageDirectory = ASSETS_URL+'';
         console.log('local-app',this.storageDirectory);
         return;
       }
+      if ( this.network.type !== 'none' && this.network.type !== 'unknown' ) {
+        console.log('Estas conectado a internet')
+        this.storageDirectory = ASSETS_URL + '';
+      }else{
       if (this.platform.is('ios')) {
         this.storageDirectory = normalizeURL(this.file.documentsDirectory);
 
       }else if (this.platform.is('android')) {
         this.storageDirectory = this.file.dataDirectory;
       }
+    }
     });
   }
 

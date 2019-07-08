@@ -60,18 +60,16 @@ export class MapaPage {
       //DIRECCION DE LA CARPETA EN DONDE SE VAN A GUARDAR LOS ARCHIVOS
     this.platform.ready().then(() => {
 
-      console.log(this.network.type);
-      if ( this.network.type !== 'none' && this.network.type !== 'unknown' ) {
-        console.log('Estas conectado a internet')
-        this.internet = true;
-      }
-
-
       if (!this.platform.is('cordova')) {
         this.storageDirectory = ASSETS_URL + '';
         console.log('local-app', this.storageDirectory);
         return;
       }
+      if ( this.network.type !== 'none' && this.network.type !== 'unknown' ) {
+        console.log('Estas conectado a internet')
+        this.storageDirectory = ASSETS_URL + '';
+        this.internet = true;
+      }else{
       if (this.platform.is('ios')) {
         this.storageDirectory = normalizeURL(this.file.documentsDirectory);
         this.isDevice = true;
@@ -80,6 +78,8 @@ export class MapaPage {
         this.storageDirectory = this.file.dataDirectory;
         this.isDevice = true;
       }
+    }
+    console.log('utilizo esta direccion', this.storageDirectory);
     });
     
   }
@@ -104,6 +104,9 @@ export class MapaPage {
       console.log('Ubicacion correcta',resp);
       loading.dismiss();
     }).catch((error) => {
+      let coordenadas = {}
+      coordenadas['coords']={latitude:-0.219736, longitude: -78.511754}
+      this.mapa(coordenadas);
       console.log('Ubicacion error: ',error);
       loading.dismiss();
 
