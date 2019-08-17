@@ -625,7 +625,7 @@ export class OfflinemapsPage {
       iconSize: [33, 50], // size of the icon
     });
     let marker =  L.marker([this.markers[i].latitud, this.markers[i].longitud], { icon: firefoxIcon })
-    .bindPopup('<b>Lugar: </b>' + this.markers[i].nombre + '</br>' + '<b>Dirección: </b>' + this.markers[i].direccion +' </br></br> <center> <a class="link-establecimiento'+this.markers[i]['id']+'" data-establecimiento="'+ this.markers[i]['id'] +'"> Ver más </a> </center> ' )
+    .bindPopup('<b>' + this.mensajes.lugar +' </b>' + this.markers[i].nombre + '</br>' + '<b>' + this.mensajes.direccion +':</b>' + this.markers[i].direccion +' </br></br> <center> <a class="link-establecimiento'+this.markers[i]['id']+'" data-establecimiento="'+ this.markers[i]['id'] +'"> '+ this.mensajes.ver_mas + ' </a> </center> ' )
     .addTo(this.map);
 
     let self = this;

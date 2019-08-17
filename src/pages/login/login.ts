@@ -53,7 +53,7 @@ export class LoginPage {
   login(data){
     let loading = this.loadingCtrl.create({
       spinner: 'bubbles',
-      content: 'Iniciando sesión ...'
+      content: '...'
     });
 
     loading.present();
@@ -78,7 +78,7 @@ export class LoginPage {
 
       
       let alert = this.alertCtrl.create({
-        title: '<b>Atención</br></b>',
+        title: '<b>Error</br></b>',
         subTitle: err.error,
         buttons: ['OK']
       });

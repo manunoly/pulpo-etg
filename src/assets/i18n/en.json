@@ -85,7 +85,10 @@
    "offlinemaps":{
     "ubicacion":"Getting your location",
     "mapa_offline":"Loading maps..",
-    "tu_te_encuentras_aqui":"You are here"
+    "tu_te_encuentras_aqui":"You are here",
+    "lugar":"Place",
+    "direccion":"Direction",
+    "ver_mas": "See more"
     },
 
     "promotion_detail":{

@@ -86,7 +86,10 @@
       "offlinemaps":{
       "ubicacion":"Obteniendo tu ubicación",
       "mapa_offline":"Cargando mapas..",
-      "tu_te_encuentras_aqui":"Tú te encuentras aquí"
+      "tu_te_encuentras_aqui":"Tú te encuentras aquí",
+      "lugar":"Lugar",
+      "direccion":"Dirección",
+      "ver_mas": "Ver más"
       },
 
       "promotion_detail":{

@@ -150,7 +150,7 @@ export class MapaPage {
         iconSize: [33, 50], // size of the icon
       });
     L.marker([this.latitud , this.longitud], { icon: icono }).addTo(this.map)
-    .bindPopup('<b>Lugar: </b>' + this.nombre + '</br>' + '<b>Dirección: </b>' + this.direccion)
+    .bindPopup('<b>' + this.mensajes.lugar +':</b>' + this.nombre + '</br>' + '<b>' + this.mensajes.direccion +':</b>' + this.direccion)
     .addTo(this.map);
 
     } else if (this.categorias_id == 3) {
@@ -160,7 +160,7 @@ export class MapaPage {
         iconSize: [33, 50], // size of the icon
       });
     L.marker([this.latitud , this.longitud], { icon: icono }).addTo(this.map)
-    .bindPopup('<b>Lugar: </b>' + this.nombre + '</br>' + '<b>Dirección: </b>' + this.direccion)
+    .bindPopup('<b>' + this.mensajes.lugar +':</b>' + this.nombre + '</br>' + '<b>' + this.mensajes.direccion +':</b>' + this.direccion)
     .addTo(this.map);
 
     }else if (this.categorias_id == 4) {
@@ -170,7 +170,7 @@ export class MapaPage {
         iconSize: [33, 50], // size of the icon
       });
     L.marker([this.latitud , this.longitud], { icon: icono }).addTo(this.map)
-    .bindPopup('<b>Lugar: </b>' + this.nombre + '</br>' + '<b>Dirección: </b>' + this.direccion)
+    .bindPopup('<b>' + this.mensajes.lugar +':</b>' + this.nombre + '</br>' + '<b>' + this.mensajes.direccion +':</b>' + this.direccion)
     .addTo(this.map);
 
     }else if (this.categorias_id == 2) {
@@ -180,12 +180,12 @@ export class MapaPage {
         iconSize: [33, 50], // size of the icon
       });
     L.marker([this.latitud , this.longitud], { icon: icono }).addTo(this.map)
-    .bindPopup('<b>Lugar: </b>' + this.nombre + '</br>' + '<b>Dirección: </b>' + this.direccion)
+    .bindPopup('<b>' + this.mensajes.lugar +':</b>' + this.nombre + '</br>' + '<b>' + this.mensajes.direccion +':</b>' + this.direccion)
     .addTo(this.map);
 
     }else{
       L.marker([this.latitud , this.longitud]).addTo(this.map)
-      .bindPopup('<b>Lugar: </b>' + this.nombre + '</br>' + '<b>Dirección: </b>' + this.direccion)
+      .bindPopup('<b>' + this.mensajes.lugar +':</b>' + this.nombre + '</br>' + '<b>' + this.mensajes.direccion +':</b>' + this.direccion)
       .addTo(this.map);
     }
 
