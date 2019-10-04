@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Component,  ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -27,7 +28,8 @@ export class LoginPage {
     public loadingCtrl: LoadingController,
     public proveedor: Proveedor1Provider,
     private readonly storage: Storage,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public translate: TranslateService
   ) {
     
   }
@@ -71,15 +73,16 @@ export class LoginPage {
         }
 
       });
-  }, (err) => {
+  }, async (err) => {
     
+      const msg = await this.translate.get('P1:LOGINERROR').toPromise();
+
       loading.dismiss();
       console.log(err);
-
       
       let alert = this.alertCtrl.create({
         title: '<b>Error</br></b>',
-        subTitle: err.error,
+        subTitle: msg,
         buttons: ['OK']
       });
       alert.present();

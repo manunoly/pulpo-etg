@@ -604,7 +604,7 @@ export class Proveedor1Provider {
 actualizarPerfil(form){
   return new Promise((resolve, errores) => {
 
-    this.authHttp.post(`${SERVER_URL}/actualizarPerfil`, form)
+    this.authHttp.post(`${SERVER_URL}/actualizarCuenta`, form)
     .subscribe(res => {
       let data = res.json();
       resolve(data);

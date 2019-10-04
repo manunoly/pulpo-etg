@@ -72,7 +72,7 @@
       <ion-list >
         <ion-item >
           <ion-label class="txtlogin" floating>{{ 'P2:EMAIL' | translate }}</ion-label>
-          <ion-input type="text" name="email" ngModel required #email="ngModel"
+          <ion-input minlength="5" type="email" name="email" email ngModel required #email="ngModel"
                      [class.invalid]="email.errors && email.dirty"></ion-input>
         </ion-item>
         <ion-item class="error-message" no-lines *ngIf="email.errors?.required && email.dirty">
@@ -81,7 +81,7 @@
   
         <ion-item>
           <ion-label class="txtlogin"  floating>{{ 'P2:PASSWORD' | translate }}:</ion-label>
-          <ion-input type="password" name="password" ngModel required #password="ngModel"
+          <ion-input minlength="3" type="password" name="password" ngModel required #password="ngModel"
                      [class.invalid]="password.errors && password.dirty"></ion-input>
         </ion-item>
         <ion-item class="error-message" no-lines *ngIf="password.errors?.required && password.dirty">

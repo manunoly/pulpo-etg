@@ -11,13 +11,13 @@
 
       <ion-item>
         <ion-label floating class="texto">{{ 'P2:REGEMAIL' | translate }}:</ion-label>
-        <ion-input [value]="user?.email" type="email" name="email" minlength="5" ngModel required email
+        <ion-input readonly [value]="user?.email" type="email" name="email" minlength="5" ngModel required email
           #email="ngModel"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label floating class="texto">{{ 'P5:TEL' | translate }}:</ion-label>
-        <ion-input [value]="user?.telefono" type="tel" name="telefono" minlength="5" ngModel telefono
+        <ion-label floating class="texto">{{ 'P5:TEL' | translate }}</ion-label>
+        <ion-input [value]="user?.telefono" type="number" name="telefono" minlength="5" require ngModel telefono
           #telefono="ngModel"></ion-input>
       </ion-item>
 
