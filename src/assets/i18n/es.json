@@ -4,6 +4,7 @@
   "P1:BOTON": "SELECCIONAR",
   "P1:SALIR": "SALIR",
   "P1:ACEPTAR": "ACEPTAR",
+  "P1:LOGINERROR": "Sus credenciales no son válidas",
 
    "P2:SEGMENTO1": "INICIAR SESIÓN",
    "P2:EMAIL": "EMAIL",
@@ -23,6 +24,7 @@
    "P2:ACEPTERM3": "de uso",
    "P2:OLVIDOCON": "¿OLVIDÓ SU CONTRASEÑA?",
    "P2:OLVIDOCON2": "Ingrese su email, para iniciar el reseteo de contraseña",
+   "P2:OLVIDOCONENVIO": "Te hemos enviado un correo electrónico",
 
     "P3:TITULO3": "Configuración",
     "P3:BOTON3": "CONTINUAR",
@@ -58,6 +60,8 @@
     "P2:TXTSTEPS": "¿Estás listo?",
     "P2:TXTSTEPS1": "EMPECEMOS YA!",
     "P2:TXTSTEPS2": "Te da la bienvenida",
+    "P2:PERFIL": "Perfil actualizado exitosamente",
+    "P2:PERFILERROR": "Por favor revise los datos introducidos e intente nuevamente",
 
 
     "configuracion" : {

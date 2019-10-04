@@ -3,6 +3,7 @@
   "P1:BOTON": "SELECT",
   "P1:SALIR": "LOGOUT",
   "P1:ACEPTAR": "ACCEPT",
+  "P1:LOGINERROR": "Your credentials are not valid",
 
   "P2:SEGMENTO1": "LOG IN",
   "P2:EMAIL": "EMAIL",
@@ -22,6 +23,7 @@
    "P2:ACEPTERM3": "of use",
    "P2:OLVIDOCON": "FORGOT YOUR PASSWORD",
    "P2:OLVIDOCON2": "Enter your email, to start the password reset",
+   "P2:OLVIDOCONENVIO": "We've sent you an email",
 
    "P3:TITULO3": "Settings",
    "P3:BOTON3": "CONTINUE",
@@ -57,6 +59,8 @@
    "P2:TXTSTEPS": "Are you ready?",
    "P2:TXTSTEPS1": "LET'S START NOW!",
    "P2:TXTSTEPS2": "Welcomes you",
+   "P2:PERFIL": "Profile updated successfully",
+   "P2:PERFILERROR": "Your profile can't be save, please check data and try again",
 
 
 
