@@ -35,9 +35,11 @@ export class Proveedor1Provider {
  
         this.http.post(`${SERVER_URL}/login`, credentials)
           .subscribe(res => {
- 
+            
             let data = res.json();
             this.storage.set('jwt', data.token );
+            console.log('data del usuario luego de hacer login', data);
+            this.storage.set('data-user',data.user);
             resolve(data);
 
           }, (err) => {
@@ -599,6 +601,23 @@ export class Proveedor1Provider {
     });
   }
 
+actualizarPerfil(form){
+  return new Promise((resolve, errores) => {
 
+    this.authHttp.post(`${SERVER_URL}/actualizarPerfil`, form)
+    .subscribe(res => {
+      let data = res.json();
+      resolve(data);
+
+    }, (err) => {
+      if(err['_body']){
+        errores(err.json());
+      }else{
+        this.error_conexion();
+      }
+    });
+
+  });
+}
   
 }
