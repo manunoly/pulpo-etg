@@ -12,11 +12,12 @@ export class TabsPage {
   tab1Root: any;
   tab1Params:any;
   tab2Params:any;
-
+  
   tab2Root: any = 'PromotionsPage';
   //tab3Root: any = 'StorePage';
- //tab4Root: any = 'ConfiguracionPage';
-  tab3Root: any;
+  tab3Root: any = 'ConfiguracionPage'; 
+  // tab3Root: any;
+  tab4Root:any = 'PerfilPage';
 
   myIndex: number;
 
