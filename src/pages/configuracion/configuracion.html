@@ -63,7 +63,7 @@
                         </ion-col>
                       </ion-row>
                     </ion-label>
-                    <ion-toggle checked="checkExist(mapa)" (ionChange)="btndescarga(mapa, $event.checked)"></ion-toggle>
+                    <ion-toggle [checked]="mapaDescargado(mapa.nombre)" (ionChange)="btndescarga(mapa, $event.checked)"></ion-toggle>
                       </ion-item>
                     <ion-item-options side="left">
                       <button ion-button class="boton_eliminar" (click)="eliminarmapa(mapa)"><ion-icon name="remove-circle"></ion-icon>Eliminar</button>

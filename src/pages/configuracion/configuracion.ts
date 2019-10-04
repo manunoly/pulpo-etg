@@ -47,6 +47,7 @@ export class ConfiguracionPage {
 
 
   archivos_no_descargados:any = [];
+  mapasDescargados = [];
 
   constructor(
     public navCtrl: NavController,
@@ -496,6 +497,12 @@ export class ConfiguracionPage {
     */
   }
 
+  mapaDescargado(archivo){
+    console.log('para el toogle', archivo);
+    if(this.mapasDescargados.indexOf(archivo.toLowerCase()) > -1)
+      return true;
+    return false;
+  }
   
 
   async descargandoArchivos(){
@@ -508,9 +515,13 @@ export class ConfiguracionPage {
      * Recorriendo archivos para la descarga
      */
     let i;
+    const cant = this.archivos_descarga.length;
     for(i = 0; i < this.archivos_descarga.length ; i++){
 
+      loading.setContent(this.mensajes.descargando + ' ' + i + ' / ' + cant);
+
       if(!this.archivos_descarga[i]['city']){
+
 
         await this.descargador( this.archivos_descarga[i]['link'] ).then((resultado) => {
 
@@ -700,7 +711,8 @@ export class ConfiguracionPage {
 
   //PARA DESCARGAR LOS MAPAS DESDE EL GRID VIEW
   btndescarga(archivo, check = true) {
-    if(!check){
+    
+    if(this.verificarArchivo(archivo['nombre'])){
       return;
     }
     let nombre_archivo = JSON.parse( archivo['archivo'] );
@@ -831,7 +843,7 @@ export class ConfiguracionPage {
 
     console.log('AQUI SE GUARDA', this.storageDirectory + this.ciudad_descarga);
 
-    this.zip.unzip(this.storageDirectory + this.mapa_descarga[0]['original_name'] , this.storageDirectory + this.ciudad_descarga, (progress) => console.log('Unzipping, ' + Math.round((progress.loaded / progress.total) * 100) + '%'))
+    this.zip.unzip(this.storageDirectory + this.mapa_descarga[0]['original_name'] , this.storageDirectory + this.ciudad_descarga, (progress) =>  loader.setContent(this.mensajes.descomprimir + ' ' + Math.round((progress.loaded / progress.total) * 100) + '%'))
       .then((result) => {
         console.log(result);
         loader.dismiss();
@@ -912,6 +924,7 @@ obtener_mapas() {
     return new Promise((resultado, fallo) => {
       this.file.checkDir(this.storageDirectory, nombre)
         .then(() => {
+          this.mapasDescargados.push(nombre);
           console.log('Si existe archivo : ', nombre);
           resultado(true);
         }, (err) => {
