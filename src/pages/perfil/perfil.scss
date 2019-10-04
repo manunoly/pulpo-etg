@@ -1,0 +1,116 @@
+page-perfil {
+  .logo img{
+      width: 50%;
+      padding-bottom: 2%;
+  }
+  .txtlogin{
+   color: #FF322E !important;
+   font-size: 16px !important;
+   font-weight: 500;
+   font-family: 'Rubik-Medium';
+  }
+
+  .segment .segment-button.segment-activated{
+      background-color:#FF322E !important;
+      color: #ffffff !important;
+      width: 79px !important;
+      height: auto !important;
+  }
+  .segment-button {
+      border: solid 1px #FF322E !important;
+      color: #FF322E !important;
+      border-radius: 5px !important;
+      font-size: 16px !important;
+      font-family: 'Rubik-Medium';
+      background: #ffffff !important;
+      font-weight: 100 !important;
+      padding-top: 3px !important;
+      width: 79px !important;
+      height: auto !important;
+  }
+  page-login .segment-button {
+      color: #FF322E !important;
+      
+  }
+  .btnseleccionar{
+      margin-top: 5%;
+      font-family: 'Rubik-Medium';
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 500;
+      width: 100%;
+      height: 50px;
+      color: white !important;
+      background: linear-gradient(278deg, #ff322e, #fbb034);
+      box-shadow: 0 24px 24px -10px rgba(251, 176, 52, 0.5);
+      margin-left: auto;
+      margin-right: auto;
+   }
+
+  .recordar{
+      font-family: 'Rubik-Medium';  
+      color: #FF322E !important;
+      text-align: center; 
+  }
+
+  input.text-input.text-input-md {
+      color: #fbb034;
+  }
+
+  .error-message{
+      color: #FF322E;
+      font-family: 'Rubik-Medium';
+      font-size: 10px !important;
+  }
+
+  //SOLO IOS
+  .item-ios.item-label-floating .text-input {
+      color: #fbb034 !important;
+      font-weight: 100 !important;
+      font-family: 'Rubik-Medium'; 
+  }
+
+  .list-ios > .item-block:first-child {
+      border-top: none !important;
+  }
+
+  .item{
+      color: #FF322E;
+      font-family: 'Rubik-Medium'; 
+      font-weight: 500;
+  }
+  .terminos{
+      padding-top: -4px!important;
+      color: #d0021b;
+      width: 336px;
+      height: 27px;
+      font-family: 'Rubik-Medium';
+      font-size: 14px;
+      letter-spacing: normal;
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
+  }
+
+  .texto{
+      color: #ff322e !important;
+      font-size: 16px;
+      font-family: 'Rubik-Medium';
+  }
+  .checkbox{
+      margin-bottom: -2px !important;
+      border-color: #FF322E !important;
+  }
+  .checkbox-checked{
+      border-color: #FF322E !important;
+      background-color:#FF322E !important;
+  }
+  .checkbox-icon{
+      border-color: #FF322E !important;
+      border-radius: 0% !important;
+      border-width: 1.5px !important;
+  }
+  .checkbox-ios {
+      margin-bottom: -5px !important;
+  }
+}

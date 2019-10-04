@@ -1,0 +1,40 @@
+<ion-content padding>
+
+  <form #form="ngForm" (ngSubmit)="actualizarPerfil(form.value)" novalidate>
+    <ion-list padding>
+
+      <ion-item>
+        <ion-label floating class="texto">{{ 'P2:REGNOMBRE' | translate }}:</ion-label>
+        <ion-input [value]="user?.name" type="text" name="name" minlength="3" ngModel required #name="ngModel">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating class="texto">{{ 'P2:REGEMAIL' | translate }}:</ion-label>
+        <ion-input [value]="user?.email" type="email" name="email" minlength="5" ngModel required email
+          #email="ngModel"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating class="texto">{{ 'P5:TEL' | translate }}:</ion-label>
+        <ion-input [value]="user?.telefono" type="tel" name="telefono" minlength="5" ngModel telefono
+          #telefono="ngModel"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating class="texto">{{ 'P2:REGPASSWORD' | translate }}:</ion-label>
+        <ion-input type="password" name="password" minlength="6" ngModel #password="ngModel"></ion-input>
+      </ion-item>
+
+      <div padding>
+        <button ion-button class="btnseleccionar" type="submit"
+          [disabled]="!form.valid">{{ 'P1:ACEPTAR' | translate }}</button>
+      </div>
+
+    </ion-list>
+  </form>
+
+  <div padding text-center>
+    <button ion-button class="btnseleccionar" (click)="logOut()">{{ 'P1:SALIR' | translate }}</button>
+  </div>
+</ion-content>
