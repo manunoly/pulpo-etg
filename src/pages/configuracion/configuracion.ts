@@ -499,7 +499,7 @@ export class ConfiguracionPage {
 
   mapaDescargado(archivo){
     console.log('para el toogle', archivo);
-    if(this.mapasDescargados.indexOf(archivo.toLowerCase()) > -1)
+    if(this.mapasDescargados.length > 0 && this.mapasDescargados.indexOf(archivo.toLowerCase()) > -1)
       return true;
     return false;
   }
@@ -712,7 +712,7 @@ export class ConfiguracionPage {
   //PARA DESCARGAR LOS MAPAS DESDE EL GRID VIEW
   btndescarga(archivo, check = true) {
     
-    if(this.verificarArchivo(archivo['nombre'])){
+    if(this.mapaDescargado(archivo['nombre'])){
       return;
     }
     let nombre_archivo = JSON.parse( archivo['archivo'] );
@@ -818,7 +818,6 @@ export class ConfiguracionPage {
 
       this.fileTransfer.download(url, this.storageDirectory + this.mapa_descarga[0]['original_name'] ).then((entry) => {
         console.log('Descarga completa  : ' + entry.toURL());
-        //this.fileTransfer.onProgress((progress) =>  console.log(progress) );
         this.imagen = entry.toURL();
         loader.dismiss();
 
@@ -831,6 +830,11 @@ export class ConfiguracionPage {
         console.log('ERROR', error);
         loader.dismiss();
       });
+      this.fileTransfer.onProgress((progressEvent) =>{ 
+        if(loader != undefined)
+          loader.setContent(this.mensajes.descargando_mapa + ' ' + Math.round(((progressEvent.loaded / progressEvent.total) * 100)) + '%') 
+      });
+
     });
   }
 
@@ -925,6 +929,11 @@ obtener_mapas() {
       this.file.checkDir(this.storageDirectory, nombre)
         .then(() => {
           this.mapasDescargados.push(nombre);
+          //me voy al mapa si tengo datos
+          setTimeout(() => {
+            if(this.archivos_descarga.length == 0)
+              this.ir_mapa();
+          }, 100);
           console.log('Si existe archivo : ', nombre);
           resultado(true);
         }, (err) => {
@@ -1107,24 +1116,41 @@ obtener_mapas() {
   ir_mapa(){
 
     console.log('Parametros que se envian: ' , this.ciudad_offline ,this.coordenadas, this.id_ciudad);
-    
-    if(!this.isDevice) { 
-      this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: true, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad });
-      return;
-    }
-
-    this.file.checkDir(this.storageDirectory, this.ciudad_offline)
-    .then(() => {
-      if (this.ciudad_offline) {
-        this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: true, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad });
-      } else {
-        this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: false, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad  });
+    if(this.navCtrl.parent != null){
+    // this.navCtrl.parent.select(0);
+      if(!this.isDevice) { 
+        this.navCtrl.parent.select(0, { ciudad: this.ciudad_offline, valor: true, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad });
+        return;
       }
-    }, (err) => {
-      
-      
-    });
 
+      this.file.checkDir(this.storageDirectory, this.ciudad_offline)
+      .then(() => {
+        if (this.ciudad_offline) {
+          this.navCtrl.parent.select(0, { ciudad: this.ciudad_offline, valor: true, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad });
+        } else {
+          this.navCtrl.parent.select(0, { ciudad: this.ciudad_offline, valor: false, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad  });
+        }
+      }, (err) => {});
+      
+    }else {
+
+      if(!this.isDevice) { 
+        this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: true, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad });
+        return;
+      }
+
+      this.file.checkDir(this.storageDirectory, this.ciudad_offline)
+      .then(() => {
+        if (this.ciudad_offline) {
+          this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: true, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad });
+        } else {
+          this.navCtrl.setRoot('TabsPage', { ciudad: this.ciudad_offline, valor: false, coordenadas: this.coordenadas, id_ciudad: this.id_ciudad  });
+        }
+      }, (err) => {
+        
+        
+      });
+    }
 
   }
 
