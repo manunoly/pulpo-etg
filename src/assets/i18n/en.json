@@ -24,6 +24,7 @@
    "P2:OLVIDOCON": "FORGOT YOUR PASSWORD",
    "P2:OLVIDOCON2": "Enter your email, to start the password reset",
    "P2:OLVIDOCONENVIO": "We've sent you an email",
+   "P2:CHOOSELANG": "Choose your language",
 
    "P3:TITULO3": "Settings",
    "P3:BOTON3": "CONTINUE",
@@ -47,6 +48,7 @@
    "P6:MAPAS": "Maps",
    "P6:COMERCIO": "Promotions",
    "P6:CONFIGURACIONES": "Settings",
+   "P61:CONFIGURACIONES": "Profile",
 
    "P7:ESCANEARPROMO": "Show this promotion at the cash desk",
    "P7:DISTANCIAAPROXIMADA": "Approximate distance",

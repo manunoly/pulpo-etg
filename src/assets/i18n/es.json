@@ -25,7 +25,8 @@
    "P2:OLVIDOCON": "¿OLVIDÓ SU CONTRASEÑA?",
    "P2:OLVIDOCON2": "Ingrese su email, para iniciar el reseteo de contraseña",
    "P2:OLVIDOCONENVIO": "Te hemos enviado un correo electrónico",
-
+   "P2:CHOOSELANG": "Seleccione el idioma",
+   
     "P3:TITULO3": "Configuración",
     "P3:BOTON3": "CONTINUAR",
     "P3:UBICACION": "UBICACIÓN: ",
@@ -48,6 +49,7 @@
     "P6:MAPAS": "Mapas",
     "P6:COMERCIO": "Promociones",
     "P6:CONFIGURACIONES": "Configuraciones",
+    "P61:CONFIGURACIONES": "Perfil",
 
     "P7:ESCANEARPROMO": "Presenta la promoción en caja",
     "P7:DISTANCIAAPROXIMADA": "Distancia aproximada",
