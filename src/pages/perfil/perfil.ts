@@ -78,4 +78,12 @@ export class PerfilPage {
     this.proveedor.logout();
     this.navCtrl.setRoot(LoginPage);
   }
+
+  choose(lang) {
+    console.log(lang);
+    
+    this.storage.set('ls_idioma',lang);
+    this.translate.use(lang);
+    
+  }
 }

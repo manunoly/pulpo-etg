@@ -34,6 +34,15 @@
     </ion-list>
   </form>
 
+  <ion-item no-lines>
+    <ion-label floating>{{ 'P2:CHOOSELANG' | translate }}</ion-label>
+    <ion-select (ionChange)="choose($event)" no-lines>
+        <ion-option value="es" >Español</ion-option>
+        <ion-option value="en">English</ion-option>
+    </ion-select>
+
+  </ion-item>
+
   <div padding text-center>
     <button ion-button class="btnseleccionar" (click)="logOut()">{{ 'P1:SALIR' | translate }}</button>
   </div>
