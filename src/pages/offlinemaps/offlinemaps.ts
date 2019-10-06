@@ -142,12 +142,17 @@ export class OfflinemapsPage {
     })
     // this.addGeofence();
 
-  }
-
-  async ionViewWillEnter(){
+    //ejecutar localizarme
     setTimeout(() => {
       this.localizarme();
     }, 3500);
+    this.ionViewDidEnterFuntion();
+  }
+
+  async ionViewWillEnter(){
+    // setTimeout(() => {
+    //   this.localizarme();
+    // }, 3500);
   }
 
   presentToast(msg) {
@@ -219,7 +224,7 @@ export class OfflinemapsPage {
   }
 
   //VISTA DE LOS MAPAS OFFLINE Y ONLINE
-  ionViewDidEnter() {
+  ionViewDidEnterFuntion() {
     // if(!this.ciudad_recibida)
     //   this.ciudad_recibida = this.navParams.get("ciudad");
     // if(!this.valor)
@@ -314,14 +319,14 @@ export class OfflinemapsPage {
   
   ionViewDidLeave(){
     
-    let self = this;
-    this.l_markers.forEach(function (layer) { 
-      self.map.removeLayer(layer);
-    });
-    this.map.remove();
-    this.markers_base = [];
-    this.l_markers = [];
-    this.markers = [];
+    // let self = this;
+    // this.l_markers.forEach(function (layer) { 
+    //   self.map.removeLayer(layer);
+    // });
+    // this.map.remove();
+    // this.markers_base = [];
+    // this.l_markers = [];
+    // this.markers = [];
 
   }
 
@@ -466,9 +471,12 @@ export class OfflinemapsPage {
     });
     loading.present();
 
-    this.map = L.map('map').
-      setView(this.coordenadas_recibidas,
-        13);
+      let container = L.DomUtil.get('map');
+      if(container != null)
+        (container as any)._leaflet_id = null;
+      this.map = L.map('map').
+        setView(this.coordenadas_recibidas,
+          9);
 
     loading.dismiss();
 
