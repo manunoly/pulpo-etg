@@ -4,6 +4,11 @@
   "P1:SALIR": "LOGOUT",
   "P1:ACEPTAR": "ACCEPT",
   "P1:LOGINERROR": "Your credentials are not valid",
+  "P1:LOGINNAME": "Username to short, at least 5 character",
+  "P1:LOGINEMAIL": "Please, check email",
+  "P1:PASSWORDLENGHT": "Password to short, at least 6 character",
+  "P1:ACCOUNTSUCCESS": "Bienvenido",
+  "P1:ACCOUNTEXIST": "Account exist",
 
   "P2:SEGMENTO1": "LOG IN",
   "P2:EMAIL": "EMAIL",

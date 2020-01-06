@@ -5,6 +5,11 @@
   "P1:SALIR": "SALIR",
   "P1:ACEPTAR": "ACEPTAR",
   "P1:LOGINERROR": "Sus credenciales no son válidas",
+  "P1:LOGINNAME": "Usuario muy corto, debe ser al menos 5 caracteres",
+  "P1:LOGINEMAIL": "Por favor, revise su email",
+  "P1:PASSWORDLENGHT": "Contraseña muy corta, debe ser al menos 6 caracteres",
+  "P1:ACCOUNTSUCCESS": "Welcome",
+  "P1:ACCOUNTEXIST": "Cuenta existe",
 
    "P2:SEGMENTO1": "INICIAR SESIÓN",
    "P2:EMAIL": "EMAIL",
