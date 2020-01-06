@@ -476,7 +476,7 @@ export class OfflinemapsPage {
         (container as any)._leaflet_id = null;
       this.map = L.map('map').
         setView(this.coordenadas_recibidas,
-          9);
+          16);
 
     loading.dismiss();
 
@@ -499,6 +499,12 @@ export class OfflinemapsPage {
   async localizarme(){
     
     if(this.mi_marcador){
+      if(this.mi_marcador && this.mi_marcador._latlng != undefined && this.map != undefined){
+        this.map.panTo(this.mi_marcador._latlng);
+        this.map.setView(this.mi_marcador._latlng);
+        this.map.setZoom(16);
+      }
+
       let options = {
         enableHighAccuracy : false
       };
@@ -531,6 +537,9 @@ export class OfflinemapsPage {
         this.map.removeLayer(this.mi_marcador);
       } catch (error) {}
       this.mi_marcador = L.marker([ this.latitud , this.longitud ], { icon: firefoxIcon }).addTo(this.map);
+      this.map.panTo(this.mi_marcador._latlng);
+      this.map.setView(this.mi_marcador._latlng);
+      this.map.setZoom(16);
     }
 
     try {
@@ -538,7 +547,8 @@ export class OfflinemapsPage {
         this.latitud=resp.coords.latitude
         this.longitud=resp.coords.longitude
         this.map.panTo(new L.LatLng(this.latitud , this.longitud));
-
+        this.map.setView(this.mi_marcador._latlng);
+        this.map.setZoom(16);
     } catch (error) {
       
     }

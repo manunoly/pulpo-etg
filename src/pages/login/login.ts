@@ -52,7 +52,23 @@ export class LoginPage {
     this.navCtrl.push(ResetpasswordPage);
   }
 
-  login(data){
+  async login(data){
+    const emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
+    if (!emailRegex.test(data.email)) {
+      const msg = await this.translate.get('P1:LOGINEMAIL').toPromise();
+      this.message({status : true , text: msg, title:'Info'});
+      return;
+    }
+
+    if((data.password).length < 6){
+      const msg = await this.translate.get('P1:PASSWORDLENGHT').toPromise();
+
+      this.message({status : true , text: msg, title:'Info'});
+      return;
+    }
+
+
     let loading = this.loadingCtrl.create({
       spinner: 'bubbles',
       content: '...'
@@ -86,6 +102,8 @@ export class LoginPage {
         buttons: ['OK']
       });
       alert.present();
+  }).catch(_=>{
+    loading.dismiss();
   });
 
 
@@ -94,7 +112,7 @@ export class LoginPage {
 
   //REGISTRO EN LA APLICACIÓN
 
-  signup(f: NgForm) {
+  async signup(f: NgForm) {
     
     let value = f.value;
 
@@ -103,15 +121,30 @@ export class LoginPage {
       return;
     }*/
 
-    if((value.name).length < 2){
-      this.message({status : true , text:"Tu nombre debe tener más de 2 caracteres.", title:'Advertencia'});
+    const emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
+    if (!emailRegex.test(value.email)) {
+      const msg = await this.translate.get('P1:LOGINEMAIL').toPromise();
+
+      this.message({status : true , text: msg, title:'Info'});
+
+      return;
+
+    }
+
+    if((value.name).length < 5){
+      const msg = await this.translate.get('P1:LOGINNAME').toPromise();
+
+      this.message({status : true , text: msg, title:'Info'});
 
       return;
 
     }
 
     if((value.password).length < 6){
-      this.message({status : true , text:"La contraseña debe ser mayor a 6 dígitos.", title:'Advertencia'});
+      const msg = await this.translate.get('P1:PASSWORDLENGHT').toPromise();
+
+      this.message({status : true , text: msg, title:'Info'});
       return;
     }
 
@@ -130,7 +163,14 @@ export class LoginPage {
 
     
 
-    this.proveedor.signup(value).then((result) => {
+    this.proveedor.signup(value).then(async (result) => {
+      console.log(result);
+      if(result['exist']){
+        const msg = await this.translate.get('P1:ACCOUNTEXIST').toPromise();
+        this.message({status : true , text: msg, title:'Info'});
+        loading.dismiss();
+        return;
+      }
         let form_login = {
           email : value.email,
           password: value.password
@@ -140,15 +180,18 @@ export class LoginPage {
          * INICIAR SESION
          */
         
-        this.proveedor.login(value).then((result) => {
+        this.proveedor.login(value).then(async (result) => {
+        // const msg = await this.translate.get('P1:ACCOUNTSUCCESS').toPromise();
+          // this.message({status : true , text:msg, title:'Info'});
           
           console.log(result);
           loading.dismiss();
-          this.message({status : true , text:"Tu cuenta se ha creado correctamente.", title:'Éxito'});
           this.navCtrl.setRoot('StepsPage');
           
         }, (err) => {
             loading.dismiss();
+        }).catch(_=>{
+          loading.dismiss();
         });
 
         
@@ -162,21 +205,28 @@ export class LoginPage {
        
 
 
-    }, (error) => {
+    }, async (error) => {
       
       let message: string;
       if( error.error){
-        
+
+        if(error.error.exist){
+          const msg = await this.translate.get('P1:ACCOUNTEXIST').toPromise();
+          this.message({status : true , text: msg, title:'Info'});
+          return;
+        }
 
         //let error = JSON.parse(err._body);
         if(error.error.email){
-          this.message({status : true , text:"El correo ya se encuentra registrado. Si deseas recuperar la contraseña, utiliza el link.", title:'Atención'});
+          const msg = await this.translate.get('P1:ACCOUNTEXIST').toPromise();
+          this.message({status : true , text:msg, title:'Info'});
 
         }else if(error.error.name){
-          this.message({status : true , text:"El nombre debe ser mayor a 2 caracteres.", title:'Atención'});
+          const msg = await this.translate.get('P1:LOGINNAME').toPromise();
+          this.message({status : true , text:msg, title:'Info'});
 
         }else{
-          this.message({status : true , text:"Lo sentimos, error inesperado.", title:'Advertencia'});
+          this.message({status : true , text:'Error', title:'Info'});
 
         }
    
@@ -199,7 +249,7 @@ export class LoginPage {
       loading.dismiss();
       
 
-    });
+    }).catch(_=> loading.dismiss());
   }
 
   message(message){

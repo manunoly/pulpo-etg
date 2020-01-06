@@ -212,7 +212,7 @@ export class Proveedor1Provider {
           .subscribe(res => {
  
            console.log('CORRECTO');
-            resolve(res);
+            resolve(res.json());
  
           }, (err) => {
             
