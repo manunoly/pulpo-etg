@@ -207,6 +207,8 @@ export class LoginPage {
 
     }, async (error) => {
       
+      loading.dismiss();
+      
       let message: string;
       if( error.error){
 
@@ -229,14 +231,12 @@ export class LoginPage {
           this.message({status : true , text:'Error', title:'Info'});
 
         }
-   
-        
+
    
       }else{
         
         if(error.isTrusted){
           this.message({status : true , text:"Se ha perdido la conexión con el servidor.", title:'Advertencia'});
-          loading.dismiss();
         }else{
           message = `Error desconocido: ${error}`;
           this.message({status : true , text:"Lo sentimos, error inesperado."+message  , title:'Advertencia'});
@@ -244,10 +244,7 @@ export class LoginPage {
         }
 
        
-      }
-
-      loading.dismiss();
-      
+      }      
 
     }).catch(_=> loading.dismiss());
   }
